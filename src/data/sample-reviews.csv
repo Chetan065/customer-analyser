@@ -1,0 +1,158 @@
+text,rating,source,product_version,occurred_at
+"Every time I try to export our monthly board report to CSV, the web app crashes with a blank white screen. Lost 2 hours of work yesterday!",1,Zendesk,v2.5.0,2026-09-12T14:22:00Z
+Exporting to PDF fails silently. The spinning wheel runs forever and no file downloads. Our clients need these reports weekly.,2,G2,v2.5.1,2026-09-15T09:15:00Z
+CSV export is completely broken for projects with more than 100 tasks. Throws an internal server error every single time.,1,App Store,v2.5.2,2026-09-20T11:40:00Z
+"Love the dashboard views, but the PDF export cuts off the rightmost columns and corrupts data formatting.",3,Capterra,v2.4.8,2026-08-04T16:10:00Z
+Tried exporting data for our board meeting and the CSV export button was completely unresponsive. Had to copy paste manually.,2,Support Ticket,v2.5.0,2026-09-25T13:00:00Z
+"Export report functionality is so buggy. It works once out of five attempts, usually timing out with a 504 gateway error.",1,In-App NPS,v2.5.2,2026-10-02T10:30:00Z
+Google Calendar sync keeps disconnecting every 3 days. I miss team meetings because task deadlines do not update on my calendar.,1,G2,v2.4.9,2026-08-11T12:00:00Z
+Calendar two-way sync creates duplicate events whenever a teammate reschedules a deadline. My calendar is a mess.,2,Zendesk,v2.5.0,2026-08-28T08:45:00Z
+The Google calendar integration constantly shows auth token expired. We have to re-authenticate our entire team every week.,2,Support Ticket,v2.5.1,2026-09-03T15:20:00Z
+Deadline sync with Outlook and Google Calendar is terribly delayed. Changes take up to 4 hours to reflect on my phone.,2,Capterra,v2.4.5,2026-07-19T14:10:00Z
+Sync between Google Calendar and milestones stopped working completely after the last update. Urgent fix needed!,1,Support Ticket,v2.5.2,2026-10-05T09:00:00Z
+Push notifications on iOS are completely broken after updating to iOS 18. Nothing arrives unless the app is actively open.,1,App Store,v2.5.2,2026-09-28T18:30:00Z
+Mobile app crashes instantly whenever I open a task that has images or PDF attachments. Unusable on iPhone 15.,1,App Store,v2.5.1,2026-09-18T17:15:00Z
+I do not receive any notification badges on my Android device. Missed several high-priority ticket assignments from my manager.,2,Google Play,v2.5.0,2026-09-08T11:05:00Z
+The iOS mobile app is extremely laggy on scroll and crashes about twice a day during field inspections.,2,App Store,v2.4.9,2026-08-22T13:40:00Z
+Notifications arrive 2 hours late. Real-time collaboration is impossible when push alerts are this delayed.,2,In-App NPS,v2.5.2,2026-10-10T14:50:00Z
+App crashes every time I upload a photo from the camera roll on iPad. Please fix this critical bug.,1,App Store,v2.5.1,2026-09-22T08:20:00Z
+We loved the product until renewal time when our pricing increased by 65% with zero advance notice. We are actively migrating our team to ClickUp.,1,G2,v2.5.0,2026-09-14T10:00:00Z
+The mandatory 10-seat minimum is absurd for small boutique agencies. We only have 4 staff members but are forced to pay for 10 full licenses. Will cancel if not resolved.,2,Capterra,v2.4.9,2026-08-30T16:45:00Z
+Billing charged our corporate credit card twice this month and support took 9 business days to acknowledge and issue a refund.,1,Support Ticket,v2.5.1,2026-09-19T11:10:00Z
+Too expensive for what it offers. You lock basic features like custom reporting and activity logs behind the exorbitant Enterprise tier.,2,G2,v2.5.2,2026-10-01T15:30:00Z
+Price hikes every year with very few actual improvements to the core workflow. Seriously considering cancelling our enterprise contract next quarter.,2,In-App NPS,v2.4.8,2026-08-15T12:00:00Z
+Hidden fees for API access were never mentioned during sales demos. Very dishonest pricing model.,1,Capterra,v2.5.0,2026-09-05T13:15:00Z
+"Please add a native Slack bot integration so our team can create, assign, and update tasks directly from Slack channels.",4,G2,v2.5.0,2026-09-10T09:20:00Z
+We desperately need deep Slack integration with interactive buttons to approve requests and comment without opening the browser.,4,Support Ticket,v2.5.1,2026-09-21T14:00:00Z
+A Slack app that posts daily task digests into project channels would save our team at least 30 minutes every morning.,5,Capterra,v2.4.9,2026-08-25T11:30:00Z
+Would love to see two-way sync with Slack threads and task comments. Right now our conversations are fragmented between two tools.,4,In-App NPS,v2.5.2,2026-10-04T16:40:00Z
+Slack bot notifications for @mentions in task descriptions would be game changing for our engineering team.,4,G2,v2.5.0,2026-09-02T10:15:00Z
+"We desperately need automated recurring tasks (daily, weekly, monthly). Recreating repetitive sprint maintenance tasks manually every Monday is tedious and error-prone.",3,Capterra,v2.4.8,2026-08-05T10:30:00Z
+Lack of recurring tasks is the only reason we haven’t rolled this out to our accounting team. We have monthly financial closes that need automated schedules.,3,Support Ticket,v2.5.0,2026-09-12T13:50:00Z
+Feature request: Recurring checklists and templates for weekly client status check-ins.,4,G2,v2.5.1,2026-09-24T15:10:00Z
+Why is there no repeating task option? Even basic todo apps have this. Please implement recurring task rules soon.,2,In-App NPS,v2.5.2,2026-10-06T12:20:00Z
+Recurring tasks with custom cron intervals or flexible day-of-month scheduling would make this tool complete for operations teams.,4,Capterra,v2.5.1,2026-09-29T14:35:00Z
+Dark mode for the mobile app please! Using the app late at night or during night shifts literally blinds my eyes.,3,App Store,v2.5.2,2026-10-08T22:15:00Z
+"Web version has dark mode, so why does the iOS mobile app still only have blinding bright white? Please support system theme.",3,App Store,v2.5.0,2026-09-09T23:05:00Z
+I do most of my triage at night. A true OLED dark theme on Android would be greatly appreciated.,4,Google Play,v2.5.1,2026-09-23T21:40:00Z
+Please add dark mode to the tablet and phone apps. It is 2026 and this should be a standard feature.,3,In-App NPS,v2.5.2,2026-10-12T19:30:00Z
+We need custom outgoing webhooks triggered on task creation and status change so we can automate our deployment pipeline.,4,Support Ticket,v2.4.9,2026-08-20T14:10:00Z
+Can you provide an official Zapier or Make.com integration? Connecting our CRM leads to project tasks currently requires messy custom scripts.,4,G2,v2.5.0,2026-09-07T15:25:00Z
+Outbound webhooks with HMAC signature verification would allow our security team to safely integrate with internal audit systems.,5,Capterra,v2.5.1,2026-09-27T10:45:00Z
+API rate limits are too restrictive (60 req/min) for data synchronization. Please add webhooks to reduce constant polling.,3,Support Ticket,v2.5.2,2026-10-03T11:15:00Z
+Customer support response time is abysmal. Waited 4 days just to receive a templated link to an outdated FAQ page.,1,Zendesk,v2.4.7,2026-07-28T09:40:00Z
+Support rep was completely unhelpful when addressing our billing issue. Rude and dismissive attitude.,1,Support Ticket,v2.5.0,2026-09-11T16:00:00Z
+Live chat is never actually live. It just asks you to leave an email and promises a reply within 24 hours that never arrives.,1,In-App NPS,v2.5.1,2026-09-26T14:10:00Z
+The onboarding interactive tour was fantastic! Our 15-person marketing team learned the basics in less than 20 minutes.,5,G2,v2.4.6,2026-07-15T11:00:00Z
+"Documentation is clear, step-by-step videos made training new hires seamless. Great job on the knowledge base.",5,Capterra,v2.5.0,2026-09-13T10:30:00Z
+"The search bar is painfully slow. Typing in a project name freezes the entire UI for 3 seconds, and partial word matches do not work.",2,G2,v2.5.0,2026-09-16T13:20:00Z
+Global search often fails to find tasks created earlier in the same day. Search index appears to be desynced.,2,Support Ticket,v2.5.1,2026-09-30T15:45:00Z
+Loading boards with more than 80 cards takes over 8 seconds. Our team experiences frequent browser tab memory warnings.,2,In-App NPS,v2.5.2,2026-10-09T16:15:00Z
+"UI is smooth and snappy on small projects, but crawls to a halt when switching between large team workspaces.",3,Capterra,v2.4.8,2026-08-18T10:05:00Z
+CloudFlow has transformed how our product team operates. Kanban boards with swimlanes are gorgeous and fast.,5,G2,v2.5.0,2026-09-01T08:30:00Z
+"The best project management tool we have used in 7 years. Clean UI, intuitive keyboard shortcuts, and rock-solid collaboration.",5,Capterra,v2.4.9,2026-08-27T17:00:00Z
+"Custom fields and tag filters are so flexible. We replaced Jira and Trello in one sweep and saved $12,000 annually.",5,G2,v2.5.1,2026-09-25T11:20:00Z
+Super clean interface! The markdown support inside task descriptions is implemented better than Notion.,5,App Store,v2.5.2,2026-10-07T14:15:00Z
+Gantt timeline view is a masterpiece. Managing cross-functional dependencies across 6 departments is finally painless.,5,Capterra,v2.5.0,2026-09-17T12:45:00Z
+We love the real-time presence indicators. Seeing teammate avatars on task cards prevents duplicate work completely.,5,In-App NPS,v2.4.8,2026-08-14T09:10:00Z
+Great software if you enjoy guessing whether your edits actually saved or got eaten by a sync error. Stellar experience really.,1,G2,v2.5.1,2026-09-22T16:00:00Z
+"Oh wonderful, another price hike right after our export button stopped working. Money well spent as always.",1,Capterra,v2.5.2,2026-10-04T11:30:00Z
+"The design looks like it was handcrafted by angels, but the backend performs like it is hosted on a microwave.",2,App Store,v2.4.9,2026-08-31T15:20:00Z
+Fantastic app for solitary hermits since notifications never inform you when teammates assign urgent tasks to you.,2,Google Play,v2.5.0,2026-09-15T18:40:00Z
+Exporting filtered tables to CSV drops all custom field values.,2,Zendesk,v2.5.1,2026-09-18T10:00:00Z
+Data export feature fails when date range spans more than 6 months.,2,Support Ticket,v2.5.0,2026-09-13T12:00:00Z
+Can you please fix the CSV export timeout? Our quarterly compliance audit is delayed because of this.,1,Support Ticket,v2.5.2,2026-10-06T14:00:00Z
+Attempting to download Excel report yields a 0KB corrupt file.,1,G2,v2.5.1,2026-09-26T09:30:00Z
+We need a reliable way to bulk export our project history. Right now export crashes 80% of the time.,2,Capterra,v2.5.2,2026-10-11T16:45:00Z
+Export to CSV produces strange UTF-8 encoding errors with non-English characters.,2,Support Ticket,v2.4.9,2026-08-29T11:10:00Z
+Calendar events created by CloudFlow appear 1 hour off in daylight savings time.,2,Zendesk,v2.5.1,2026-09-21T08:45:00Z
+Sync with Outlook 365 calendar fails with authentication expired error.,2,Support Ticket,v2.5.0,2026-09-14T15:20:00Z
+Google Calendar sync deletes our client meetings if the task status is moved to archived.,1,G2,v2.5.2,2026-10-02T13:10:00Z
+Recurring calendar sync creates duplicate calendar entries on Apple Calendar.,2,App Store,v2.5.0,2026-09-10T17:00:00Z
+Calendar sync latency is intolerable. Deadlines updated at 9am show up at 1pm.,2,Capterra,v2.5.1,2026-09-27T10:15:00Z
+iOS notification badge count is always stuck on 99+ even when all notifications are cleared.,3,App Store,v2.5.1,2026-09-23T19:00:00Z
+App randomly logs me out on iPhone when switching between WiFi and cellular data.,2,App Store,v2.5.2,2026-10-05T08:15:00Z
+Android push notifications arrive without sound or vibration despite system permissions.,2,Google Play,v2.5.0,2026-09-11T12:30:00Z
+Opening task comments on mobile app crashes if comment contains a mention.,1,App Store,v2.5.2,2026-10-08T15:40:00Z
+The mobile UI feels clunky on iPad mini. Buttons overlap the bottom navigation bar.,3,App Store,v2.4.8,2026-08-12T14:20:00Z
+Offline mode on mobile doesn’t work. Cannot view downloaded tasks on airplanes.,2,Google Play,v2.5.1,2026-09-24T18:00:00Z
+Cancelled our team subscription today. A 50% price increase during a tough economic year is unacceptable.,1,G2,v2.5.2,2026-10-07T11:00:00Z
+We are considering alternatives to CloudFlow due to seat pricing tiers forcing us into unnecessary licenses.,2,In-App NPS,v2.5.0,2026-09-16T16:15:00Z
+"Our team of 6 had to pay for 10 users. When we asked sales for a 6-seat plan, they refused flatly. Goodbye.",1,Capterra,v2.5.1,2026-09-28T14:50:00Z
+Billing renewal failed and customer accounts were immediately locked out without grace period. Terrifying for business operations.,1,Zendesk,v2.5.0,2026-09-17T09:20:00Z
+Enterprise tier pricing is opaque. Sales rep quoted one price and contract came back 30% higher.,1,G2,v2.4.9,2026-08-26T13:40:00Z
+"We love CloudFlow, but our whole company lives in Slack. A native Slack integration for task updates is critical.",4,G2,v2.5.0,2026-09-08T10:45:00Z
+Would be great to receive personal DM alerts from a CloudFlow Slack bot when assigned a task.,4,In-App NPS,v2.5.1,2026-09-25T15:30:00Z
+Please build a Slack slash command like /cloudflow new [task title] to quickly log tickets.,5,Capterra,v2.5.2,2026-10-03T16:00:00Z
+Integrating with Slack channels for automated milestone announcements would boost team morale.,4,G2,v2.4.8,2026-08-16T11:20:00Z
+Our marketing team runs sprint planning bi-weekly. We need recurring task templates that auto-populate every two weeks.,4,Capterra,v2.5.0,2026-09-12T11:15:00Z
+Cannot use CloudFlow for recurring compliance routines without recurring task automation.,3,Support Ticket,v2.5.1,2026-09-22T13:00:00Z
+Recurring tasks please! It is the number one requested feature on your public community board.,4,In-App NPS,v2.5.2,2026-10-09T09:40:00Z
+Having to clone task templates manually each month is painful and waste of management time.,3,G2,v2.4.9,2026-08-23T15:00:00Z
+Dark theme on iOS mobile app would make reading tickets in low light so much easier on the eyes.,4,App Store,v2.5.2,2026-10-10T20:10:00Z
+Can you please implement dark mode on Android? The white background is blinding at night.,3,Google Play,v2.5.1,2026-09-29T22:30:00Z
+"Great app overall, but missing dark mode on iPad is disappointing in 2026.",4,App Store,v2.5.0,2026-09-14T21:15:00Z
+Please support outgoing webhooks so we can sync tasks with our GitHub and GitLab pull requests.,4,Support Ticket,v2.5.1,2026-09-20T14:30:00Z
+Zapier integration would let us pipe customer bug reports from Typeform straight into CloudFlow boards.,5,Capterra,v2.5.0,2026-09-06T10:00:00Z
+Need webhooks for automated billing reconciliation whenever a project milestone is marked complete.,4,G2,v2.4.7,2026-07-22T16:40:00Z
+Support took over 5 days to respond to an urgent project permission lock issue.,1,Zendesk,v2.5.0,2026-09-15T11:30:00Z
+Tier 1 support staff don’t understand technical questions and just copy paste generic documentation.,2,G2,v2.5.1,2026-09-27T15:00:00Z
+Customer success manager was outstanding during our enterprise rollout. Very patient and knowledgeable.,5,Capterra,v2.4.8,2026-08-10T14:00:00Z
+Help center search results are outdated. Many articles still reference the legacy v1 navigation.,2,Support Ticket,v2.5.2,2026-10-04T13:20:00Z
+Global search takes 4 to 5 seconds to load results in workspaces with over 200 tasks.,2,G2,v2.5.1,2026-09-23T10:15:00Z
+Search by tag is broken. Clicking on #urgent shows zero results even though multiple tasks have that tag.,2,Support Ticket,v2.5.2,2026-10-07T12:00:00Z
+Page load times have gotten noticeably slower with each recent release.,2,In-App NPS,v2.5.0,2026-09-18T14:45:00Z
+Filtering tasks by assignee causes high CPU usage and browser lag on Chrome.,2,G2,v2.4.9,2026-08-28T16:10:00Z
+The UI design is by far the cleanest in the industry. It makes daily task management a joy.,5,G2,v2.5.0,2026-09-04T09:10:00Z
+Subtask nesting and dependency arrows in the timeline view are flawless. Incredible productivity boost.,5,Capterra,v2.5.1,2026-09-24T11:00:00Z
+Saved our remote agency over 10 hours a week in status sync meetings. Absolutely love this tool.,5,G2,v2.4.9,2026-08-25T16:30:00Z
+Keyboard shortcuts are super responsive. I can navigate and create tasks without touching my mouse.,5,App Store,v2.5.2,2026-10-11T13:20:00Z
+Our designers and developers finally agree on a single tool. CloudFlow bridges the gap beautifully.,5,Capterra,v2.5.0,2026-09-12T15:40:00Z
+Customer feedback boards and client portals are sleek. Our clients love the transparent progress view.,5,In-App NPS,v2.5.1,2026-09-30T10:00:00Z
+"Fast, reliable, and modern. Transitioning from Jira was the best decision our team made this year.",5,G2,v2.5.2,2026-10-08T17:15:00Z
+Permissions and role-based access control work exactly as advertised. Easy for external contractors.,5,Capterra,v2.4.8,2026-08-19T14:50:00Z
+"Solid features and nice layout, but occasional lag when drag-and-dropping cards between columns.",3,G2,v2.5.0,2026-09-09T11:35:00Z
+"We like the Kanban view, but the lack of custom automations forces us to do too much manual maintenance.",3,Capterra,v2.5.1,2026-09-22T10:20:00Z
+"Great desktop application, mediocre mobile companion app. Hope the mobile team catches up.",3,App Store,v2.5.2,2026-10-06T15:10:00Z
+"Has potential to beat Monday.com, but the support responsiveness and pricing transparency need serious work.",3,G2,v2.4.9,2026-08-27T13:00:00Z
+"Good tool for startups, but enterprise security features like SAML SSO are gated behind top-tier pricing.",3,Capterra,v2.5.0,2026-09-13T16:20:00Z
+CSV export repeatedly fails with a timeout when filtering large date spans. We really need this fixed for audits.,2,Support Ticket,v2.5.1,2026-09-19T10:20:00Z
+Export button does not respond on Safari browser. Works on Chrome but completely dead on Safari.,2,Zendesk,v2.5.0,2026-09-11T14:15:00Z
+Google calendar sync loses sync token every Monday morning. Every team member has to reconnect manually.,2,Support Ticket,v2.5.2,2026-10-04T08:50:00Z
+Calendar sync causes infinite loop notifications when two people edit the same task description simultaneously.,1,G2,v2.5.1,2026-09-25T16:20:00Z
+iOS notification badge does not clear until phone is restarted. Very annoying glitch.,2,App Store,v2.5.2,2026-10-09T18:00:00Z
+Mobile app crashes whenever I tap on the attachments tab of any task card.,1,App Store,v2.5.0,2026-09-14T12:40:00Z
+Renewed our contract only to discover seat pricing jumped from $12 to $20 per seat without notice. Thinking of churn.,1,Capterra,v2.5.2,2026-10-07T13:40:00Z
+Forced to buy 10 seats for a 3-person dev team. Either offer flexible seat packs or we are moving to Linear.,2,G2,v2.5.1,2026-09-28T11:20:00Z
+Slack integration would literally double our team adoption rate. Please prioritize building a Slack app.,4,Support Ticket,v2.5.0,2026-09-08T15:10:00Z
+Can we have Slack unfurling for CloudFlow links? Pasting task links in Slack currently shows nothing.,4,In-App NPS,v2.5.1,2026-09-26T12:00:00Z
+Recurring tasks are essential for our sprint retrospectives and weekly client status calls. Where is this feature?,3,Capterra,v2.5.2,2026-10-05T14:30:00Z
+Please let us schedule recurring tasks that repeat on the first business day of every month.,4,Support Ticket,v2.4.9,2026-08-30T10:10:00Z
+Dark mode for iOS and Android apps is desperately needed. The white theme hurts when checking tasks in bed.,3,Google Play,v2.5.2,2026-10-10T23:10:00Z
+Would love custom webhooks to notify our Discord server when a bug is marked resolved.,4,Support Ticket,v2.5.1,2026-09-21T11:45:00Z
+Customer service wait times are ridiculous. 72 hours for a simple password reset confirmation.,1,Zendesk,v2.5.0,2026-09-10T16:00:00Z
+Search filter dropdown closes itself whenever you select a second option. Terrible UX bug.,2,G2,v2.5.1,2026-09-24T09:15:00Z
+Speed and responsiveness on web are unmatched. Best task tracking experience on the market.,5,G2,v2.5.2,2026-10-11T10:00:00Z
+The team collaboration features are smooth. Dragging tasks between sprints is effortless.,5,Capterra,v2.5.0,2026-09-07T14:20:00Z
+Gorgeous interface and wonderful keyboard shortcuts. Makes project management enjoyable.,5,App Store,v2.5.1,2026-09-29T16:40:00Z
+"Fantastic Kanban boards, but please give us a dark mode option on our mobile devices.",4,In-App NPS,v2.5.2,2026-10-08T11:50:00Z
+"Nice tool, but having no recurring tasks and a broken CSV export makes month-end close painful.",3,Capterra,v2.5.1,2026-09-23T14:10:00Z
+"Everything is great except customer support, which takes days to reply to basic billing tickets.",3,G2,v2.5.0,2026-09-15T15:30:00Z
+Love the real-time updates and task dependencies. So much better than Jira for agile teams.,5,G2,v2.5.2,2026-10-12T09:00:00Z
+Exporting our team dataset to CSV consistently crashes our browser. Needs urgent developer attention.,1,Support Ticket,v2.5.1,2026-09-27T11:30:00Z
+Google calendar sync disconnected again. Missed our client sync call this morning.,1,Zendesk,v2.5.2,2026-10-06T09:15:00Z
+We were charged for 15 seats instead of 10. Billing support has not responded for 4 days.,1,Support Ticket,v2.5.0,2026-09-16T10:45:00Z
+Can we get native Slack bot alerts when comments mention @channel or @here?,4,In-App NPS,v2.5.1,2026-09-28T15:00:00Z
+Automated recurring tasks would save our project coordinators at least 5 hours every single week.,4,G2,v2.5.2,2026-10-03T14:10:00Z
+Dark mode on iOS would be a dream. Otherwise the app is nearly perfect.,4,App Store,v2.5.1,2026-09-22T21:00:00Z
+Webhooks for task state transitions (In Progress -> Review -> Done) are a must for CI/CD automation.,4,Support Ticket,v2.5.0,2026-09-12T16:30:00Z
+Search is sluggish when searching across multiple projects. Takes way too long to return results.,2,Capterra,v2.5.2,2026-10-07T15:20:00Z
+Onboarding was smooth and our whole company adopted it within a week. Highly recommend!,5,G2,v2.4.9,2026-08-24T10:30:00Z
+The visual project timelines and Gantt chart view are truly best-in-class.,5,Capterra,v2.5.1,2026-09-25T13:45:00Z
+Sarcastic applause for the export feature that corrupts files right before executive presentations.,1,G2,v2.5.2,2026-10-04T17:00:00Z
+Billing surprised us with a massive renewal rate hike. Looking at Asana and ClickUp today.,1,In-App NPS,v2.5.1,2026-09-30T14:20:00Z
+Recurring tasks and Slack bot are the two missing pieces preventing this from being a 10/10 tool.,4,G2,v2.5.0,2026-09-14T11:10:00Z
+"Calendar sync fails silently without any error prompt, leaving you to wonder why meetings are missing.",1,Support Ticket,v2.5.2,2026-10-08T09:30:00Z
+Mobile app crashes on launch after updating to latest version. Reinstall did not fix it.,1,App Store,v2.5.2,2026-10-10T12:00:00Z
+Very intuitive navigation and lightning fast search inside task cards. Great engineering work.,5,Capterra,v2.5.0,2026-09-17T14:00:00Z
+The pricing jump without any new enterprise features feels like price gouging. Disappointed.,2,G2,v2.5.1,2026-09-26T16:15:00Z
