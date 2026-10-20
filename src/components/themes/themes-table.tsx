@@ -57,19 +57,20 @@ export function ThemesTable({
 
   return (
     <div className="rounded-xl border bg-card shadow-xs overflow-hidden">
-      <Table>
-        <TableHeader>
-          <TableRow className="bg-muted/30">
-            <TableHead className="w-12 text-center text-xs">#</TableHead>
-            <TableHead className="text-xs">Theme & Summary</TableHead>
-            <TableHead className="w-32 text-xs">Type</TableHead>
-            <TableHead className="w-32 text-xs text-center">Mentions</TableHead>
-            <TableHead className="w-28 text-xs text-center">Avg Sentiment</TableHead>
-            <TableHead className="w-28 text-xs text-center">Severity</TableHead>
-            <TableHead className="w-40 text-xs">Priority Score</TableHead>
-            <TableHead className="w-12 text-xs"></TableHead>
-          </TableRow>
-        </TableHeader>
+      <div className="overflow-x-auto min-w-0">
+        <Table className="min-w-[720px]">
+          <TableHeader>
+            <TableRow className="bg-muted/30">
+              <TableHead className="w-12 text-center text-xs">#</TableHead>
+              <TableHead className="text-xs">Theme & Summary</TableHead>
+              <TableHead className="w-32 text-xs">Type</TableHead>
+              <TableHead className="w-32 text-xs text-center">Mentions</TableHead>
+              <TableHead className="w-28 text-xs text-center">Avg Sentiment</TableHead>
+              <TableHead className="w-28 text-xs text-center">Severity</TableHead>
+              <TableHead className="w-40 text-xs">Priority Score</TableHead>
+              <TableHead className="w-12 text-xs"></TableHead>
+            </TableRow>
+          </TableHeader>
         <TableBody>
           {themes.map((theme, index) => {
             const mentionsPct =
@@ -145,6 +146,7 @@ export function ThemesTable({
           })}
         </TableBody>
       </Table>
+      </div>
     </div>
   );
 }

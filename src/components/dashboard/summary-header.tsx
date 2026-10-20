@@ -87,15 +87,15 @@ export function SummaryHeader({
   return (
     <div className="space-y-4">
       {/* Top Title & Actions Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b">
-        <div>
-          <div className="flex items-center gap-2.5">
-            <h1 className="text-2xl font-bold tracking-tight text-foreground">{projectName}</h1>
-            <Badge variant="outline" className="text-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 pb-3 border-b min-w-0">
+        <div className="min-w-0">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground truncate">{projectName}</h1>
+            <Badge variant="outline" className="text-xs shrink-0">
               Project Insights
             </Badge>
           </div>
-          <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground mt-1">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs text-muted-foreground mt-1">
             <div className="flex items-center gap-1">
               <Calendar className="h-3.5 w-3.5 text-primary" />
               <span>{formatDateRange()}</span>
@@ -103,7 +103,7 @@ export function SummaryHeader({
             <span>•</span>
             <div className="flex items-center gap-1">
               <Clock className="h-3.5 w-3.5 text-primary" />
-              <span>
+              <span className="truncate">
                 {lastAnalyzedAt
                   ? `Analyzed ${new Date(lastAnalyzedAt).toLocaleString("en-US", {
                       month: "short",
@@ -117,13 +117,14 @@ export function SummaryHeader({
           </div>
         </div>
 
-        <div className="flex items-center gap-2.5">
+        <div className="flex flex-wrap items-center gap-2 shrink-0">
           {/* Info Popover: How Scoring Works */}
           <Popover>
             <PopoverTrigger asChild>
-              <Button variant="outline" size="sm" className="gap-1.5 text-xs">
+              <Button variant="outline" size="sm" className="gap-1.5 text-xs h-8 sm:h-9">
                 <HelpCircle className="h-3.5 w-3.5 text-muted-foreground" />
-                <span>How Scores Work</span>
+                <span className="hidden xs:inline">How Scores Work</span>
+                <span className="xs:hidden">Scores</span>
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-80 text-xs space-y-2.5 p-4" align="end">
@@ -147,7 +148,7 @@ export function SummaryHeader({
           {/* Export Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="sm" className="gap-1.5 text-xs">
+              <Button variant="outline" size="sm" className="gap-1.5 text-xs h-8 sm:h-9">
                 <Download className="h-3.5 w-3.5 text-muted-foreground" />
                 <span>Export</span>
               </Button>
@@ -179,64 +180,64 @@ export function SummaryHeader({
             size="sm"
             onClick={onRunAnalysis}
             disabled={isRunning || stats.totalItems === 0}
-            className="gap-2 shadow-xs font-semibold"
+            className="gap-2 shadow-xs font-semibold text-xs h-8 sm:h-9"
           >
             <Sparkles className="h-4 w-4" />
-            <span>{lastAnalyzedAt ? "Re-run Analysis" : "Analyze Feedback"}</span>
+            <span>{lastAnalyzedAt ? "Re-run" : "Analyze"}</span>
           </Button>
         </div>
       </div>
 
       {/* Metric Cards Row */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {/* Total Feedback */}
-        <div className="rounded-xl border bg-card p-4 shadow-xs">
-          <div className="text-xs font-medium text-muted-foreground">Total Ingested Feedback</div>
-          <div className="text-2xl font-bold tracking-tight text-foreground mt-1">
+        <div className="rounded-xl border bg-card p-3 sm:p-4 shadow-xs min-w-0">
+          <div className="text-xs font-medium text-muted-foreground truncate">Total Ingested Feedback</div>
+          <div className="text-xl sm:text-2xl font-bold tracking-tight text-foreground mt-1 truncate">
             {stats.totalItems.toLocaleString()}
           </div>
-          <div className="text-[11px] text-muted-foreground mt-1">
+          <div className="text-[11px] text-muted-foreground mt-1 truncate">
             {stats.analyzedCount} analyzed ({Math.round((stats.analyzedCount / Math.max(1, stats.totalItems)) * 100)}%)
           </div>
         </div>
 
         {/* Overall Sentiment */}
-        <div className="rounded-xl border bg-card p-4 shadow-xs">
-          <div className="text-xs font-medium text-muted-foreground">Overall Sentiment Score</div>
-          <div className={`text-2xl font-bold tracking-tight mt-1 ${tone.color}`}>
+        <div className="rounded-xl border bg-card p-3 sm:p-4 shadow-xs min-w-0">
+          <div className="text-xs font-medium text-muted-foreground truncate">Overall Sentiment Score</div>
+          <div className={`text-xl sm:text-2xl font-bold tracking-tight mt-1 truncate ${tone.color}`}>
             {formatScore(stats.overallSentimentScore)}
           </div>
-          <div className="text-[11px] text-muted-foreground mt-1">
-            Tone: <span className="font-medium text-foreground">{tone.label}</span> (-1.0 to +1.0)
+          <div className="text-[11px] text-muted-foreground mt-1 truncate">
+            Tone: <span className="font-medium text-foreground">{tone.label}</span>
           </div>
         </div>
 
         {/* Sentiment Ratios */}
-        <div className="rounded-xl border bg-card p-4 shadow-xs">
-          <div className="text-xs font-medium text-muted-foreground">Sentiment Breakdown</div>
-          <div className="flex items-center gap-2 mt-1">
-            <span className="text-emerald-600 font-bold text-lg">{stats.positivePct}%</span>
-            <span className="text-muted-foreground">/</span>
-            <span className="text-amber-500 font-bold text-lg">{stats.neutralPct}%</span>
-            <span className="text-muted-foreground">/</span>
-            <span className="text-rose-600 font-bold text-lg">{stats.negativePct}%</span>
+        <div className="rounded-xl border bg-card p-3 sm:p-4 shadow-xs min-w-0">
+          <div className="text-xs font-medium text-muted-foreground truncate">Sentiment Breakdown</div>
+          <div className="flex items-center gap-1.5 sm:gap-2 mt-1 truncate">
+            <span className="text-emerald-600 font-bold text-base sm:text-lg">{stats.positivePct}%</span>
+            <span className="text-muted-foreground text-xs">/</span>
+            <span className="text-amber-500 font-bold text-base sm:text-lg">{stats.neutralPct}%</span>
+            <span className="text-muted-foreground text-xs">/</span>
+            <span className="text-rose-600 font-bold text-base sm:text-lg">{stats.negativePct}%</span>
           </div>
-          <div className="text-[11px] text-muted-foreground mt-1 flex items-center gap-2">
-            <span className="inline-block w-2 h-2 rounded-full bg-emerald-500" /> Pos
-            <span className="inline-block w-2 h-2 rounded-full bg-amber-400 ml-1" /> Neu
-            <span className="inline-block w-2 h-2 rounded-full bg-rose-500 ml-1" /> Neg
+          <div className="text-[11px] text-muted-foreground mt-1 flex items-center gap-1.5 truncate">
+            <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 shrink-0" /> Pos
+            <span className="inline-block w-2 h-2 rounded-full bg-amber-400 shrink-0 ml-1" /> Neu
+            <span className="inline-block w-2 h-2 rounded-full bg-rose-500 shrink-0 ml-1" /> Neg
           </div>
         </div>
 
         {/* Churn Risk */}
-        <div className="rounded-xl border bg-card p-4 shadow-xs">
-          <div className="text-xs font-medium text-muted-foreground">Churn Risk Alerts</div>
-          <div className="text-2xl font-bold tracking-tight text-red-600 dark:text-red-400 mt-1">
+        <div className="rounded-xl border bg-card p-3 sm:p-4 shadow-xs min-w-0">
+          <div className="text-xs font-medium text-muted-foreground truncate">Churn Risk Alerts</div>
+          <div className="text-xl sm:text-2xl font-bold tracking-tight text-red-600 dark:text-red-400 mt-1 truncate">
             {stats.churnRiskCount}
           </div>
-          <div className="text-[11px] text-muted-foreground mt-1">
+          <div className="text-[11px] text-muted-foreground mt-1 truncate">
             {stats.analyzedCount > 0
-              ? `${Math.round((stats.churnRiskCount / stats.analyzedCount) * 100)}% of analyzed users`
+              ? `${Math.round((stats.churnRiskCount / stats.analyzedCount) * 100)}% of users`
               : "No flags"}
           </div>
         </div>

@@ -92,13 +92,13 @@ export function RecommendationCards({
           className="shadow-xs hover:border-primary/40 transition-colors overflow-hidden"
         >
           <CardHeader className="p-5 pb-3 bg-muted/15 border-b">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <div className="flex items-start gap-3">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 min-w-0">
+              <div className="flex items-start gap-3 min-w-0">
                 <span className="h-7 w-7 rounded-lg bg-primary/10 text-primary font-bold text-xs flex items-center justify-center shrink-0">
                   #{index + 1}
                 </span>
-                <div>
-                  <CardTitle className="text-base font-bold text-foreground">
+                <div className="min-w-0">
+                  <CardTitle className="text-base font-bold text-foreground break-words">
                     {rec.title}
                   </CardTitle>
                   <div className="flex flex-wrap items-center gap-2 mt-1.5">

@@ -1,0 +1,93 @@
+[
+  {
+    "id": "gold-01",
+    "category": "repeat_customers",
+    "question": "What are the biggest reasons for negative sentiment among repeat customers?",
+    "expectedIntent": "sentiment_reasons",
+    "expectedIsRepeat": true,
+    "expectedSentiment": "negative",
+    "expectedKeyIssuesKeywords": ["price", "renewal", "minimum", "export", "refund"]
+  },
+  {
+    "id": "gold-02",
+    "category": "new_customers",
+    "question": "What are new customers struggling with the most during onboarding?",
+    "expectedIntent": "sentiment_reasons",
+    "expectedIsRepeat": false,
+    "expectedSentiment": "negative",
+    "expectedKeyIssuesKeywords": ["onboard", "invite", "wizard", "hierarchy", "setup"]
+  },
+  {
+    "id": "gold-03",
+    "category": "feature_requests",
+    "question": "What are the top requested features across all feedback?",
+    "expectedIntent": "feature_requests",
+    "expectedKeyIssuesKeywords": ["slack", "calendar", "recurring", "integration"]
+  },
+  {
+    "id": "gold-04",
+    "category": "churn_risk",
+    "question": "Which recurring issues have the highest churn risk?",
+    "expectedIntent": "churn_analysis",
+    "expectedSentiment": "negative",
+    "expectedKeyIssuesKeywords": ["price hike", "cancel", "migrat", "seat minimum"]
+  },
+  {
+    "id": "gold-05",
+    "category": "export_bugs",
+    "question": "Why is CSV and PDF export failing for users?",
+    "expectedIntent": "sentiment_reasons",
+    "expectedSentiment": "negative",
+    "expectedKeyIssuesKeywords": ["csv", "pdf", "crash", "100 tasks", "white screen"]
+  },
+  {
+    "id": "gold-06",
+    "category": "calendar_sync",
+    "question": "What complaints do users have regarding Google Calendar synchronization?",
+    "expectedIntent": "sentiment_reasons",
+    "expectedKeyIssuesKeywords": ["calendar", "sync", "duplicate", "token", "disconnect"]
+  },
+  {
+    "id": "gold-07",
+    "category": "pricing_licensing",
+    "question": "What are customers saying about our renewal pricing and seat tiers?",
+    "expectedIntent": "sentiment_reasons",
+    "expectedKeyIssuesKeywords": ["renewal", "65%", "10-seat", "expensive", "contract"]
+  },
+  {
+    "id": "gold-08",
+    "category": "mobile_app",
+    "question": "What issues are mobile users encountering on iOS and Android?",
+    "expectedIntent": "sentiment_reasons",
+    "expectedKeyIssuesKeywords": ["ios", "android", "notification", "crash", "photo"]
+  },
+  {
+    "id": "gold-09",
+    "category": "customer_support",
+    "question": "How do customers perceive customer support responsiveness and billing disputes?",
+    "expectedIntent": "sentiment_reasons",
+    "expectedKeyIssuesKeywords": ["refund", "double charged", "days", "support"]
+  },
+  {
+    "id": "gold-10",
+    "category": "positive_sentiment",
+    "question": "What do customers love most about the product?",
+    "expectedIntent": "general_query",
+    "expectedSentiment": "positive",
+    "expectedKeyIssuesKeywords": ["kanban", "clean", "ui", "fast", "sprint"]
+  },
+  {
+    "id": "gold-11",
+    "category": "invite_tokens",
+    "question": "Why are team invite links causing friction for new teams?",
+    "expectedIntent": "sentiment_reasons",
+    "expectedIsRepeat": false,
+    "expectedKeyIssuesKeywords": ["invite", "10 minutes", "expire", "spam"]
+  },
+  {
+    "id": "gold-12",
+    "category": "missing_segments",
+    "question": "Summarize user feedback when customer segment dimensions are unknown.",
+    "expectedIntent": "general_query"
+  }
+]

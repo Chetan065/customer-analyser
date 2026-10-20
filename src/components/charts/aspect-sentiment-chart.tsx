@@ -44,24 +44,25 @@ export function AspectSentimentChart({ aspects }: AspectSentimentProps) {
       </CardHeader>
       <CardContent className="pt-2">
         {formattedData.length === 0 ? (
-          <div className="h-64 flex items-center justify-center text-xs text-muted-foreground">
+          <div className="h-72 flex items-center justify-center text-xs text-muted-foreground">
             No aspect breakdown available yet. Run the pipeline to extract aspect sentiments.
           </div>
         ) : (
-          <div className="h-64 w-full">
+          <div className="h-72 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
                 data={formattedData}
-                margin={{ top: 10, right: 10, left: -20, bottom: 20 }}
+                margin={{ top: 10, right: 10, left: -15, bottom: 35 }}
               >
                 <CartesianGrid strokeDasharray="3 3" opacity={0.2} vertical={false} />
                 <XAxis
                   dataKey="aspect"
-                  tick={{ fontSize: 11 }}
+                  tick={{ fontSize: 10 }}
                   stroke="#888888"
                   interval={0}
-                  angle={-15}
+                  angle={-25}
                   textAnchor="end"
+                  height={55}
                 />
                 <YAxis tick={{ fontSize: 11 }} stroke="#888888" />
                 <RechartsTooltip

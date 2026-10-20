@@ -44,6 +44,12 @@ export async function GET(
         analysisStatus: feedbackItems.analysisStatus,
         aspects: feedbackItems.aspects,
         isChurnRisk: feedbackItems.isChurnRisk,
+        customerId: feedbackItems.customerId,
+        orderCount: feedbackItems.orderCount,
+        isRepeatCustomer: feedbackItems.isRepeatCustomer,
+        customerSegment: feedbackItems.customerSegment,
+        region: feedbackItems.region,
+        product: feedbackItems.product,
       })
       .from(feedbackItems)
       .where(eq(feedbackItems.projectId, projectId));
@@ -168,6 +174,29 @@ export async function GET(
         .orderBy(recommendations.rank);
     }
 
+    // Customer segment statistics (Phase 2)
+    let repeatCount = 0;
+    let newCount = 0;
+    const segmentMap = new Map<string, number>();
+
+    for (const item of allItems) {
+      if (item.isRepeatCustomer) {
+        repeatCount++;
+      } else if (item.customerSegment === "new" || item.orderCount === 1) {
+        newCount++;
+      }
+
+      if (item.customerSegment) {
+        const seg = item.customerSegment.trim();
+        segmentMap.set(seg, (segmentMap.get(seg) || 0) + 1);
+      }
+    }
+
+    const availableSegments = Array.from(segmentMap.entries()).map(([name, count]) => ({
+      name,
+      count,
+    }));
+
     return successResponse({
       project,
       latestRun,
@@ -184,6 +213,10 @@ export async function GET(
         churnRiskCount,
         minDate,
         maxDate,
+        repeatCount,
+        newCount,
+        hasSegmentData: repeatCount > 0 || availableSegments.length > 0,
+        availableSegments,
       },
       sentimentDistribution: [
         { name: "Positive", value: positiveCount, color: "#10b981" },

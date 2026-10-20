@@ -96,7 +96,7 @@ export function ThemeDrawer({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-2xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="w-[calc(100%-2rem)] sm:max-w-2xl max-h-[90dvh] overflow-y-auto p-4 sm:p-6">
         {loading || !theme ? (
           <div className="py-12 text-center text-xs text-muted-foreground animate-pulse">
             Loading theme intelligence and quotes...

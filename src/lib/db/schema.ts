@@ -79,10 +79,20 @@ export const feedbackItems = pgTable(
     aspects: jsonb("aspects").$type<
       Array<{ aspect: string; sentiment: "positive" | "neutral" | "negative" }>
     >(),
+    // Customer Segment & Identity Dimensions (Phase 2)
+    customerId: text("customer_id"),
+    orderCount: integer("order_count"),
+    isRepeatCustomer: boolean("is_repeat_customer").default(false),
+    customerSegment: text("customer_segment"),
+    region: text("region"),
+    product: text("product"),
   },
   (table) => [
     index("feedback_project_idx").on(table.projectId),
     uniqueIndex("feedback_project_hash_idx").on(table.projectId, table.textHash),
+    index("feedback_project_repeat_idx").on(table.projectId, table.isRepeatCustomer),
+    index("feedback_project_segment_idx").on(table.projectId, table.customerSegment),
+    index("feedback_project_sentiment_idx").on(table.projectId, table.sentiment),
   ]
 );
 
@@ -197,6 +207,83 @@ export const recommendations = pgTable(
   ]
 );
 
+// 9. Chat Threads Table
+export const chatThreads = pgTable(
+  "chat_threads",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    projectId: uuid("project_id")
+      .notNull()
+      .references(() => projects.id, { onDelete: "cascade" }),
+    title: text("title").notNull().default("New Conversation"),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+  },
+  (table) => [
+    index("chat_threads_project_updated_idx").on(table.projectId, table.updatedAt),
+  ]
+);
+
+// 10. Chat Messages Table
+export const chatMessages = pgTable(
+  "chat_messages",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    threadId: uuid("thread_id")
+      .notNull()
+      .references(() => chatThreads.id, { onDelete: "cascade" }),
+    role: text("role", { enum: ["user", "assistant", "system"] }).notNull(),
+    content: text("content").notNull(),
+    structuredPayload: jsonb("structured_payload").$type<{
+      headline?: string;
+      keyIssues?: Array<{
+        title: string;
+        description: string;
+        severity: "critical" | "high" | "medium" | "low";
+        frequencyCount?: number;
+        affectedSegment?: string;
+        quoteIds?: string[];
+      }>;
+      supportingComments?: Array<{
+        quote: string;
+        feedbackId?: string;
+        rating?: number;
+        customerSegment?: string;
+        source?: string;
+        isRepeatCustomer?: boolean;
+        grounded?: boolean;
+      }>;
+      recommendedActions?: Array<{
+        title: string;
+        rationale: string;
+        urgency: "immediate" | "near-term" | "backlog";
+        expectedImpact: string;
+      }>;
+      caveats?: string[];
+      followUpQuestions?: string[];
+      metrics?: {
+        totalAnalyzed: number;
+        positiveCount: number;
+        neutralCount: number;
+        negativeCount: number;
+        averageRating?: number | null;
+        topSegment?: string;
+      };
+    }>(),
+    filters: jsonb("filters").$type<{
+      customerSegment?: string | null;
+      isRepeatCustomer?: boolean | null;
+      sentiment?: "positive" | "neutral" | "negative" | null;
+      aspects?: string[];
+      query?: string;
+    }>(),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+  },
+  (table) => [
+    index("chat_messages_thread_created_idx").on(table.threadId, table.createdAt),
+  ]
+);
+
 // Export types
 export type User = typeof users.$inferSelect;
 export type NewUser = typeof users.$inferInsert;
@@ -221,3 +308,9 @@ export type NewInsight = typeof insights.$inferInsert;
 
 export type Recommendation = typeof recommendations.$inferSelect;
 export type NewRecommendation = typeof recommendations.$inferInsert;
+
+export type ChatThread = typeof chatThreads.$inferSelect;
+export type NewChatThread = typeof chatThreads.$inferInsert;
+
+export type ChatMessage = typeof chatMessages.$inferSelect;
+export type NewChatMessage = typeof chatMessages.$inferInsert;

@@ -69,7 +69,13 @@ const DDL_STATEMENTS: string[] = [
     "emotion" text,
     "is_churn_risk" boolean DEFAULT false NOT NULL,
     "summary" text,
-    "aspects" jsonb
+    "aspects" jsonb,
+    "customer_id" text,
+    "order_count" integer,
+    "is_repeat_customer" boolean DEFAULT false,
+    "customer_segment" text,
+    "region" text,
+    "product" text
   );`,
 
   // 7. Themes table
@@ -115,9 +121,35 @@ const DDL_STATEMENTS: string[] = [
     "rank" integer DEFAULT 0 NOT NULL
   );`,
 
+  // 10. Chat Threads table
+  `CREATE TABLE IF NOT EXISTS "chat_threads" (
+    "id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+    "project_id" uuid NOT NULL REFERENCES "projects"("id") ON DELETE CASCADE,
+    "title" text DEFAULT 'New Conversation' NOT NULL,
+    "created_at" timestamp with time zone DEFAULT now() NOT NULL,
+    "updated_at" timestamp with time zone DEFAULT now() NOT NULL
+  );`,
+
+  // 11. Chat Messages table
+  `CREATE TABLE IF NOT EXISTS "chat_messages" (
+    "id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+    "thread_id" uuid NOT NULL REFERENCES "chat_threads"("id") ON DELETE CASCADE,
+    "role" text NOT NULL,
+    "content" text NOT NULL,
+    "structured_payload" jsonb,
+    "filters" jsonb,
+    "created_at" timestamp with time zone DEFAULT now() NOT NULL
+  );`,
+
   // Migration patches in case tables were partially created before
   `ALTER TABLE "projects" ADD COLUMN IF NOT EXISTS "user_id" uuid REFERENCES "users"("id") ON DELETE CASCADE;`,
   `ALTER TABLE "insights" ALTER COLUMN "embedding" SET DATA TYPE vector(768);`,
+  `ALTER TABLE "feedback_items" ADD COLUMN IF NOT EXISTS "customer_id" text;`,
+  `ALTER TABLE "feedback_items" ADD COLUMN IF NOT EXISTS "order_count" integer;`,
+  `ALTER TABLE "feedback_items" ADD COLUMN IF NOT EXISTS "is_repeat_customer" boolean DEFAULT false;`,
+  `ALTER TABLE "feedback_items" ADD COLUMN IF NOT EXISTS "customer_segment" text;`,
+  `ALTER TABLE "feedback_items" ADD COLUMN IF NOT EXISTS "region" text;`,
+  `ALTER TABLE "feedback_items" ADD COLUMN IF NOT EXISTS "product" text;`,
 
   // Indexes
   `CREATE INDEX IF NOT EXISTS "sessions_token_idx" ON "sessions" USING btree ("token");`,
@@ -125,13 +157,18 @@ const DDL_STATEMENTS: string[] = [
   `CREATE INDEX IF NOT EXISTS "analysis_runs_project_idx" ON "analysis_runs" USING btree ("project_id");`,
   `CREATE INDEX IF NOT EXISTS "feedback_project_idx" ON "feedback_items" USING btree ("project_id");`,
   `CREATE UNIQUE INDEX IF NOT EXISTS "feedback_project_hash_idx" ON "feedback_items" USING btree ("project_id", "text_hash");`,
+  `CREATE INDEX IF NOT EXISTS "feedback_project_repeat_idx" ON "feedback_items" USING btree ("project_id", "is_repeat_customer");`,
+  `CREATE INDEX IF NOT EXISTS "feedback_project_segment_idx" ON "feedback_items" USING btree ("project_id", "customer_segment");`,
+  `CREATE INDEX IF NOT EXISTS "feedback_project_sentiment_idx" ON "feedback_items" USING btree ("project_id", "sentiment");`,
   `CREATE INDEX IF NOT EXISTS "insights_project_kind_idx" ON "insights" USING btree ("project_id", "kind");`,
   `CREATE INDEX IF NOT EXISTS "insights_feedback_item_idx" ON "insights" USING btree ("feedback_item_id");`,
   `CREATE INDEX IF NOT EXISTS "insights_theme_idx" ON "insights" USING btree ("theme_id");`,
   `CREATE INDEX IF NOT EXISTS "recommendations_run_rank_idx" ON "recommendations" USING btree ("run_id", "rank");`,
   `CREATE INDEX IF NOT EXISTS "recommendations_project_idx" ON "recommendations" USING btree ("project_id");`,
   `CREATE INDEX IF NOT EXISTS "themes_run_priority_idx" ON "themes" USING btree ("run_id", "priority_score");`,
-  `CREATE INDEX IF NOT EXISTS "themes_project_idx" ON "themes" USING btree ("project_id");`
+  `CREATE INDEX IF NOT EXISTS "themes_project_idx" ON "themes" USING btree ("project_id");`,
+  `CREATE INDEX IF NOT EXISTS "chat_threads_project_updated_idx" ON "chat_threads" USING btree ("project_id", "updated_at");`,
+  `CREATE INDEX IF NOT EXISTS "chat_messages_thread_created_idx" ON "chat_messages" USING btree ("thread_id", "created_at");`
 ];
 
 /**

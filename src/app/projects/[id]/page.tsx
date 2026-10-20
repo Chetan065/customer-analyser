@@ -13,6 +13,7 @@ import {
   AlertTriangle,
   CheckCircle2,
   ListOrdered,
+  BotMessageSquare,
 } from "lucide-react";
 import { Header } from "@/components/layout/header";
 import { Button } from "@/components/ui/button";
@@ -86,9 +87,9 @@ export default function ProjectDashboardPage() {
 
   if (loading) {
     return (
-      <div className="flex-1 p-8 space-y-6 animate-pulse">
+      <div className="flex-1 p-4 sm:p-6 lg:p-8 space-y-6 max-w-7xl mx-auto w-full animate-pulse">
         <div className="h-20 bg-muted/40 rounded-xl" />
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[1, 2, 3, 4].map((i) => (
             <div key={i} className="h-24 bg-muted/40 rounded-xl" />
           ))}
@@ -113,7 +114,7 @@ export default function ProjectDashboardPage() {
         description="Comprehensive sentiment intelligence, ranked problem clusters, and product roadmap recommendations."
       />
 
-      <main className="flex-1 p-8 space-y-8">
+      <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full space-y-6 sm:space-y-8">
         {/* State 1: Completely Empty Project Onboarding */}
         {!hasFeedback ? (
           <div className="border-2 border-dashed rounded-2xl p-12 text-center space-y-6 max-w-2xl mx-auto my-12 bg-card">
@@ -333,6 +334,17 @@ export default function ProjectDashboardPage() {
         open={themeDrawerOpen}
         onOpenChange={setThemeDrawerOpen}
       />
+
+      {/* Floating Ask PulseIQ Button */}
+      <div className="fixed bottom-6 right-6 z-30">
+        <Link
+          href={`/projects/${projectId}/chat`}
+          className="flex items-center gap-2 rounded-full bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground shadow-lg hover:bg-primary/90 hover:scale-105 active:scale-95 transition-all"
+        >
+          <BotMessageSquare className="h-4 w-4" />
+          <span>Ask PulseIQ</span>
+        </Link>
+      </div>
     </div>
   );
 }

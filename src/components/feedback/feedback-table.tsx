@@ -140,7 +140,7 @@ export function FeedbackTable({ projectId, themeIdFilter, onRefreshTrigger }: Fe
           />
         </div>
 
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2 w-full sm:w-auto">
           {/* Sentiment Filter */}
           <select
             value={sentiment}
@@ -148,7 +148,7 @@ export function FeedbackTable({ projectId, themeIdFilter, onRefreshTrigger }: Fe
               setSentiment(e.target.value);
               setPage(1);
             }}
-            className="h-9 rounded-md border bg-background px-3 text-xs shadow-xs"
+            className="h-9 rounded-md border bg-background px-3 text-xs shadow-xs w-full sm:w-auto"
           >
             <option value="all">All Sentiments</option>
             <option value="positive">Positive</option>
@@ -163,7 +163,7 @@ export function FeedbackTable({ projectId, themeIdFilter, onRefreshTrigger }: Fe
               setRating(e.target.value);
               setPage(1);
             }}
-            className="h-9 rounded-md border bg-background px-3 text-xs shadow-xs"
+            className="h-9 rounded-md border bg-background px-3 text-xs shadow-xs w-full sm:w-auto"
           >
             <option value="all">All Ratings</option>
             <option value="5">5 Stars</option>
@@ -180,7 +180,7 @@ export function FeedbackTable({ projectId, themeIdFilter, onRefreshTrigger }: Fe
               setSource(e.target.value);
               setPage(1);
             }}
-            className="h-9 rounded-md border bg-background px-3 text-xs shadow-xs"
+            className="h-9 rounded-md border bg-background px-3 text-xs shadow-xs w-full sm:w-auto"
           >
             <option value="all">All Sources</option>
             <option value="G2">G2</option>
@@ -203,7 +203,7 @@ export function FeedbackTable({ projectId, themeIdFilter, onRefreshTrigger }: Fe
                 setSource("all");
                 setPage(1);
               }}
-              className="text-xs h-9"
+              className="text-xs h-9 col-span-2 sm:col-span-1"
             >
               Reset
             </Button>
@@ -213,16 +213,17 @@ export function FeedbackTable({ projectId, themeIdFilter, onRefreshTrigger }: Fe
 
       {/* Table */}
       <div className="rounded-xl border bg-card shadow-xs overflow-hidden">
-        <Table>
-          <TableHeader>
-            <TableRow className="bg-muted/30">
-              <TableHead className="w-28 text-xs">Date / Source</TableHead>
-              <TableHead className="text-xs">Feedback Content</TableHead>
-              <TableHead className="w-28 text-xs text-center">Rating</TableHead>
-              <TableHead className="w-36 text-xs">Sentiment</TableHead>
-              <TableHead className="w-24 text-xs text-right">Details</TableHead>
-            </TableRow>
-          </TableHeader>
+        <div className="overflow-x-auto min-w-0">
+          <Table className="min-w-[650px]">
+            <TableHeader>
+              <TableRow className="bg-muted/30">
+                <TableHead className="w-28 text-xs">Date / Source</TableHead>
+                <TableHead className="text-xs">Feedback Content</TableHead>
+                <TableHead className="w-28 text-xs text-center">Rating</TableHead>
+                <TableHead className="w-36 text-xs">Sentiment</TableHead>
+                <TableHead className="w-24 text-xs text-right">Details</TableHead>
+              </TableRow>
+            </TableHeader>
           <TableBody>
             {loading ? (
               Array.from({ length: 5 }).map((_, i) => (
@@ -301,6 +302,7 @@ export function FeedbackTable({ projectId, themeIdFilter, onRefreshTrigger }: Fe
             )}
           </TableBody>
         </Table>
+        </div>
 
         {/* Pagination Bar */}
         <div className="p-3 border-t bg-muted/20 flex items-center justify-between text-xs text-muted-foreground">
@@ -336,7 +338,7 @@ export function FeedbackTable({ projectId, themeIdFilter, onRefreshTrigger }: Fe
       {/* Item Detail Dialog */}
       <Dialog open={!!selectedItem} onOpenChange={(open) => !open && setSelectedItem(null)}>
         {selectedItem && (
-          <DialogContent className="sm:max-w-xl">
+          <DialogContent className="w-[calc(100%-2rem)] sm:max-w-xl max-h-[90dvh] overflow-y-auto p-4 sm:p-6">
             <DialogHeader>
               <DialogTitle className="flex items-center justify-between pr-6">
                 <span>Feedback Item Detail</span>

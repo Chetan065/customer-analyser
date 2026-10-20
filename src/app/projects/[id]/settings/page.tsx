@@ -12,6 +12,8 @@ import {
   Database,
   Layers,
   Sparkles,
+  Users,
+  RefreshCw,
 } from "lucide-react";
 import { Header } from "@/components/layout/header";
 import { Button } from "@/components/ui/button";
@@ -25,8 +27,10 @@ export default function SettingsPage() {
 
   const [project, setProject] = React.useState<any>(null);
   const [latestRun, setLatestRun] = React.useState<any>(null);
+  const [stats, setStats] = React.useState<any>(null);
   const [loading, setLoading] = React.useState(true);
   const [deleting, setDeleting] = React.useState(false);
+  const [recomputing, setRecomputing] = React.useState(false);
 
   React.useEffect(() => {
     fetch(`/api/projects/${projectId}/overview`)
@@ -35,11 +39,32 @@ export default function SettingsPage() {
         if (json.data) {
           setProject(json.data.project);
           setLatestRun(json.data.latestRun);
+          setStats(json.data.stats);
         }
       })
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));
   }, [projectId]);
+
+  const handleRecomputeSegments = async () => {
+    setRecomputing(true);
+    try {
+      const res = await fetch(`/api/projects/${projectId}/segments/recompute`, { method: "POST" });
+      const json = await res.json();
+      if (!res.ok || json.error) throw new Error(json.error?.message || "Failed to recompute segments");
+      toast.success(`Segments recomputed! Updated ${json.data.updatedCount} items (${json.data.repeatCount} repeat, ${json.data.newCount} new).`);
+      
+      const overRes = await fetch(`/api/projects/${projectId}/overview`);
+      const overJson = await overRes.json();
+      if (overRes.ok && overJson.data) {
+        setStats(overJson.data.stats);
+      }
+    } catch (err: any) {
+      toast.error(err.message || "Failed to recompute segments");
+    } finally {
+      setRecomputing(false);
+    }
+  };
 
   const handleDelete = async () => {
     if (!confirm("Are you sure you want to permanently delete this project? This will delete all feedback, embeddings, and themes.")) {
@@ -71,7 +96,7 @@ export default function SettingsPage() {
         description="Configuration, LLM token and cost telemetry, and database infrastructure."
       />
 
-      <main className="flex-1 p-8 space-y-6 max-w-4xl">
+      <main className="flex-1 p-4 sm:p-6 lg:p-8 space-y-6 max-w-4xl mx-auto w-full">
         {/* Cost & Token Telemetry Card */}
         <Card className="shadow-xs">
           <CardHeader className="pb-3 border-b">
@@ -159,6 +184,84 @@ export default function SettingsPage() {
               <span className="text-muted-foreground">Pipeline Runtime</span>
               <span className="font-semibold text-foreground">LangGraph JS (Serverless chunked runner)</span>
             </div>
+          </CardContent>
+        </Card>
+
+        {/* Customer Segments & Identity Card (Phase 2) */}
+        <Card className="shadow-xs">
+          <CardHeader className="pb-3 border-b flex flex-row items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className="h-8 w-8 rounded-lg bg-indigo-500/10 text-indigo-600 flex items-center justify-center">
+                <Users className="h-4 w-4" />
+              </div>
+              <div>
+                <CardTitle className="text-base font-bold">Customer Segments & Identity Dimensions</CardTitle>
+                <CardDescription className="text-xs">
+                  Customer segments powering conversational queries in Ask PulseIQ.
+                </CardDescription>
+              </div>
+            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleRecomputeSegments}
+              disabled={recomputing || loading}
+              className="text-xs gap-1.5"
+            >
+              <RefreshCw className={`h-3.5 w-3.5 ${recomputing ? "animate-spin" : ""}`} />
+              <span>{recomputing ? "Recomputing..." : "Recompute Segments"}</span>
+            </Button>
+          </CardHeader>
+          <CardContent className="p-6 space-y-4 text-xs">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="p-4 rounded-xl border bg-muted/20">
+                <div className="text-xs text-muted-foreground font-medium">Repeat Customers</div>
+                <div className="text-2xl font-bold text-foreground mt-1">
+                  {stats?.repeatCount ?? 0}
+                </div>
+                <div className="text-[11px] text-muted-foreground mt-0.5">
+                  Order count &gt; 1 or recurring customer ID
+                </div>
+              </div>
+
+              <div className="p-4 rounded-xl border bg-muted/20">
+                <div className="text-xs text-muted-foreground font-medium">New / First-Time Users</div>
+                <div className="text-2xl font-bold text-foreground mt-1">
+                  {stats?.newCount ?? 0}
+                </div>
+                <div className="text-[11px] text-muted-foreground mt-0.5">
+                  Initial onboarding or 1st order
+                </div>
+              </div>
+
+              <div className="p-4 rounded-xl border bg-muted/20">
+                <div className="text-xs text-muted-foreground font-medium">Segment Types</div>
+                <div className="text-2xl font-bold text-foreground mt-1">
+                  {stats?.availableSegments?.length ?? 0}
+                </div>
+                <div className="text-[11px] text-muted-foreground mt-0.5">
+                  Distinct customer cohorts
+                </div>
+              </div>
+            </div>
+
+            {stats?.availableSegments && stats.availableSegments.length > 0 ? (
+              <div className="space-y-2 pt-2">
+                <div className="font-semibold text-foreground">Available Cohorts & Segments:</div>
+                <div className="flex flex-wrap gap-2">
+                  {stats.availableSegments.map((seg: any) => (
+                    <Badge key={seg.name} variant="outline" className="text-xs py-1 px-2.5 gap-1.5">
+                      <span className="font-medium text-foreground">{seg.name}</span>
+                      <span className="text-muted-foreground">({seg.count} items)</span>
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className="p-3 rounded-lg border border-dashed text-muted-foreground bg-muted/10 text-xs">
+                No custom customer segments mapped yet. Map <strong>customer_id</strong>, <strong>order_count</strong>, or <strong>customer_segment</strong> columns during CSV import, or click <strong>Recompute Segments</strong> to derive repeat vs new customers automatically.
+              </div>
+            )}
           </CardContent>
         </Card>
 

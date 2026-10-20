@@ -54,8 +54,8 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-muted/20 flex flex-col justify-center items-center p-4">
-      <div className="absolute top-6 right-8">
+    <div className="min-h-[100dvh] bg-muted/20 flex flex-col justify-center items-center p-4">
+      <div className="absolute top-4 right-4 sm:top-6 sm:right-8">
         <ThemeToggle />
       </div>
 

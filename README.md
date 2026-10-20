@@ -57,6 +57,20 @@
 - **Aspect Sentiment Breakdown**: Stacked bar chart of sentiment by product area (Pricing, Performance, UI/UX, Support, Onboarding, Reliability, Integrations, Docs).
 - **Recommendation Cards**: Actionable initiatives with "Copy as Markdown" for roadmapping in Jira, Linear, or Notion.
 - **Feedback Explorer**: Full search, filtering (by sentiment, rating, source), and individual feedback inspection dialogs.
+- **Responsive Layout**: Designed for seamless experience across mobile (360px), tablet (768px), desktop (1024px/1280px), and ultrawide (1536px) with accessible slide-out navigation.
+
+### 1.4 "Ask PulseIQ" Conversational Intelligence
+- **Natural Language PM Query Engine**: Ask complex customer segment questions like *"What are the biggest reasons for negative sentiment among repeat customers?"* or *"What are new customers struggling with the most during onboarding?"*.
+- **LangGraph Chat Pipeline**: Orchestrated as a compiled 6-stage graph (`understandQuery` → `planRetrieval` → `retrieve` → `analyzeSubset` → `synthesize` → `verifyGrounding`).
+- **Real-Time Streaming SSE**: Emits live progress events (`understanding`, `planning`, `retrieving`, `analyzing`, `synthesizing`, `verifying`) over `text/event-stream`, with JSON fallback for automated APIs.
+- **Programmatic Grounding Verification**: Strict algorithmic audit rejecting fabricated or hallucinated quotes. Every displayed evidence quote is verified as a verbatim substring of a real feedback item.
+- **Persistent Conversation Threads**: Store, rename, and manage chat history per project.
+- **One-Click Prompt Starters & Follow-ups**: Suggested inquiries and clickable follow-up questions tailored to the feedback data.
+
+### 1.5 Customer Identity & Segmentation Dimensions
+- **Customer Identity Tracking**: `customer_id`, `order_count`, `is_repeat_customer`, `customer_segment` (e.g. VIP, enterprise, starter, trial), `region`, and `product`.
+- **Automatic Repeat Derivation**: Classifies customers as repeat when `order_count > 1`, when the customer ID appears $> 1$ times in the project, or when marked with repeat segments.
+- **Idempotent Segment Recomputation**: Recompute segments at any time via Project Settings or `POST /api/projects/[id]/segments/recompute`.
 
 ---
 
@@ -247,23 +261,29 @@ The database utilizes 8 relational tables managed via Drizzle ORM:
 users (id, email, password_hash, name, created_at)
   └── sessions (id, user_id, token, expires_at, created_at)
   └── projects (id, user_id, name, description, created_at)
-        ├── feedback_items (id, project_id, text, text_hash, rating, source, product_version, occurred_at, analysis_status, sentiment, sentiment_score, confidence, emotion, is_churn_risk, summary, aspects)
+        ├── feedback_items (id, project_id, text, text_hash, rating, source, product_version, occurred_at, analysis_status, sentiment, sentiment_score, confidence, emotion, is_churn_risk, summary, aspects, customer_id, order_count, is_repeat_customer, customer_segment, region, product)
         ├── analysis_runs (id, project_id, status, stage, progress, total_items, error, started_at, finished_at, summary_stats)
         │     ├── themes (id, run_id, project_id, kind, name, summary, mentions, avg_sentiment, severity_score, severity_label, priority_score, churn_share, recency_share)
         │     └── recommendations (id, run_id, project_id, title, rationale, impact, effort, theme_ids, evidence_quotes, rank)
-        └── insights (id, project_id, feedback_item_id, kind, text, severity, embedding: vector(768), theme_id)
+        ├── insights (id, project_id, feedback_item_id, kind, text, severity, embedding: vector(768), theme_id)
+        └── chat_threads (id, project_id, title, created_at, updated_at)
+              └── chat_messages (id, thread_id, role, content, structured_payload, filters, created_at)
 ```
 
 ---
 
 ## 10. Unit Tests & Verification
 
-The project includes unit tests covering core mathematical and ingestion helpers.
+The project includes 8 comprehensive test suites (39 tests total) covering auth security, mathematical formulas, clustering, ingestion, conversational grounding, and golden query evaluation.
 
-Run the test suite with Vitest:
-
+Run all tests:
 ```bash
 pnpm test
+```
+
+Run conversational intelligence evaluation:
+```bash
+pnpm eval:chat
 ```
 
 ### Verified Test Suites:
@@ -271,12 +291,16 @@ pnpm test
 - [`tests/scoring.test.ts`](file:///Volumes/ssd/f/tests/scoring.test.ts): Priority formula calculation, weights, severity label thresholds, and recency share.
 - [`tests/clustering.test.ts`](file:///Volumes/ssd/f/tests/clustering.test.ts): Exact cosine similarity, centroid calculations, agglomerative clustering, and singleton merging.
 - [`tests/csv.test.ts`](file:///Volumes/ssd/f/tests/csv.test.ts): CSV header auto-detection, text normalization, SHA-256 deduplication hashing, and language detection.
+- [`tests/chat/grounding.test.ts`](file:///Volumes/ssd/f/tests/chat/grounding.test.ts): Exact verbatim quote auditing, hallucination rejection, and metric count verification.
+- [`tests/chat/eval.test.ts`](file:///Volumes/ssd/f/tests/chat/eval.test.ts): Golden dataset evaluation across 12 test questions covering repeat vs new customers, onboarding, pricing, Slack integrations, and missing segment fallbacks.
+- [`tests/isolation.test.ts`](file:///Volumes/ssd/f/tests/isolation.test.ts): Strict multi-tenant data isolation and project boundary verification.
+- [`tests/bootstrap.test.ts`](file:///Volumes/ssd/f/tests/bootstrap.test.ts): Idempotent database schema bootstrapper.
 
 ### Production Build Verification:
 ```bash
 pnpm build
 ```
-Compiles with Turbopack with **zero TypeScript errors** across all 27 application routes and middleware.
+Compiles with **zero TypeScript errors** across all 32 application routes, API endpoints, and middleware.
 
 ---
 

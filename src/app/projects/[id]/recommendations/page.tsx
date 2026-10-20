@@ -41,7 +41,7 @@ export default function RecommendationsPage() {
         description="Prioritized, data-grounded initiatives citing exact customer evidence quotes."
       />
 
-      <main className="flex-1 p-8 space-y-6 max-w-5xl">
+      <main className="flex-1 p-4 sm:p-6 lg:p-8 space-y-6 max-w-5xl mx-auto w-full">
         <div className="flex items-center justify-between text-xs text-muted-foreground">
           <span>{recommendations.length} Strategic Recommendations Formulated</span>
         </div>

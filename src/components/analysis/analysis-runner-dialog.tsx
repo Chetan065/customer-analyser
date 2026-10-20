@@ -137,7 +137,7 @@ export function AnalysisRunnerDialog({
         }
       }}
     >
-      <DialogContent className="sm:max-w-xl">
+      <DialogContent className="w-[calc(100%-2rem)] sm:max-w-xl max-h-[90dvh] overflow-y-auto p-4 sm:p-6">
         <DialogHeader>
           <div className="flex items-center gap-2">
             <div className="h-8 w-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center">

@@ -54,7 +54,7 @@ export default function ThemesPage() {
         description="Semantically clustered customer feedback groups ranked by priority score and business impact."
       />
 
-      <main className="flex-1 p-8 space-y-6">
+      <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full space-y-6">
         {/* Controls */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">

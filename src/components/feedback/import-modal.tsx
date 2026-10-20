@@ -188,7 +188,7 @@ export function ImportModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-3xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="w-[calc(100%-2rem)] sm:max-w-3xl max-h-[90dvh] overflow-y-auto p-4 sm:p-6">
         <DialogHeader>
           <DialogTitle className="text-xl">Import Customer Feedback</DialogTitle>
           <DialogDescription>
@@ -360,6 +360,96 @@ export function ImportModal({
                         value={mapping.sourceColumn || ""}
                         onChange={(e) =>
                           setMapping({ ...mapping, sourceColumn: e.target.value || undefined })
+                        }
+                      >
+                        <option value="">(None)</option>
+                        {csvPreview.headers.map((h) => (
+                          <option key={h} value={h}>
+                            {h}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <Label className="text-xs font-medium">Customer ID (Optional)</Label>
+                      <select
+                        className="mt-1 w-full rounded-md border bg-background px-3 py-1.5 text-xs shadow-xs"
+                        value={mapping.customerIdColumn || ""}
+                        onChange={(e) =>
+                          setMapping({ ...mapping, customerIdColumn: e.target.value || undefined })
+                        }
+                      >
+                        <option value="">(None)</option>
+                        {csvPreview.headers.map((h) => (
+                          <option key={h} value={h}>
+                            {h}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <Label className="text-xs font-medium">Order Count (Optional)</Label>
+                      <select
+                        className="mt-1 w-full rounded-md border bg-background px-3 py-1.5 text-xs shadow-xs"
+                        value={mapping.orderCountColumn || ""}
+                        onChange={(e) =>
+                          setMapping({ ...mapping, orderCountColumn: e.target.value || undefined })
+                        }
+                      >
+                        <option value="">(None)</option>
+                        {csvPreview.headers.map((h) => (
+                          <option key={h} value={h}>
+                            {h}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <Label className="text-xs font-medium">Customer Segment (Optional)</Label>
+                      <select
+                        className="mt-1 w-full rounded-md border bg-background px-3 py-1.5 text-xs shadow-xs"
+                        value={mapping.customerSegmentColumn || ""}
+                        onChange={(e) =>
+                          setMapping({ ...mapping, customerSegmentColumn: e.target.value || undefined })
+                        }
+                      >
+                        <option value="">(None)</option>
+                        {csvPreview.headers.map((h) => (
+                          <option key={h} value={h}>
+                            {h}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <Label className="text-xs font-medium">Region / Country (Optional)</Label>
+                      <select
+                        className="mt-1 w-full rounded-md border bg-background px-3 py-1.5 text-xs shadow-xs"
+                        value={mapping.regionColumn || ""}
+                        onChange={(e) =>
+                          setMapping({ ...mapping, regionColumn: e.target.value || undefined })
+                        }
+                      >
+                        <option value="">(None)</option>
+                        {csvPreview.headers.map((h) => (
+                          <option key={h} value={h}>
+                            {h}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <Label className="text-xs font-medium">Product / Version (Optional)</Label>
+                      <select
+                        className="mt-1 w-full rounded-md border bg-background px-3 py-1.5 text-xs shadow-xs"
+                        value={mapping.productVersionColumn || ""}
+                        onChange={(e) =>
+                          setMapping({ ...mapping, productVersionColumn: e.target.value || undefined })
                         }
                       >
                         <option value="">(None)</option>

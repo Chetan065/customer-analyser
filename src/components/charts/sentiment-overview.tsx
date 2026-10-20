@@ -116,7 +116,7 @@ export function SentimentOverview({
               </div>
 
               {/* Legend */}
-              <div className="flex justify-center items-center gap-4 text-xs">
+              <div className="flex flex-wrap justify-center items-center gap-2.5 sm:gap-4 text-xs">
                 {distribution.map((item) => (
                   <div key={item.name} className="flex items-center gap-1.5">
                     <span

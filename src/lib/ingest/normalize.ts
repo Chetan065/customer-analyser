@@ -8,6 +8,12 @@ export interface NormalizedItem {
   productVersion?: string | null;
   occurredAt?: Date | null;
   language?: string;
+  customerId?: string | null;
+  orderCount?: number | null;
+  isRepeatCustomer?: boolean;
+  customerSegment?: string | null;
+  region?: string | null;
+  product?: string | null;
 }
 
 /**

@@ -116,31 +116,31 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {/* Top Navigation */}
-      <header className="border-b bg-card px-8 h-16 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="h-9 w-9 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-sm">
+      <header className="border-b bg-card px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between min-w-0">
+        <div className="flex items-center gap-3 min-w-0">
+          <div className="h-9 w-9 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-sm shrink-0">
             <Sparkles className="h-5 w-5" />
           </div>
-          <div>
+          <div className="truncate">
             <span className="font-bold text-base tracking-tight text-foreground">Pulse</span>
             <span className="font-bold text-base text-primary ml-1">IQ</span>
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           <ThemeToggle />
-          <Button onClick={() => setNewProjectOpen(true)} className="gap-2 shadow-xs">
+          <Button onClick={() => setNewProjectOpen(true)} className="gap-2 shadow-xs text-xs sm:text-sm">
             <FolderPlus className="h-4 w-4" />
-            <span>New Project</span>
+            <span className="hidden sm:inline">New Project</span>
           </Button>
-          <div className="pl-2 border-l">
+          <div className="pl-1 sm:pl-2 border-l">
             <UserMenu />
           </div>
         </div>
       </header>
 
       {/* Main Hero & Projects */}
-      <main className="flex-1 max-w-6xl w-full mx-auto p-8 space-y-8">
+      <main className="flex-1 max-w-6xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-6 sm:space-y-8">
         {/* Banner */}
         <div className="rounded-2xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="space-y-2 max-w-xl">

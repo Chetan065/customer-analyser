@@ -7,6 +7,8 @@ import {
   themes,
   insights,
   recommendations,
+  chatThreads,
+  chatMessages,
   type NewProject,
   type NewFeedbackItem,
   type Project,
@@ -14,6 +16,10 @@ import {
   type Theme,
   type Recommendation,
   type AnalysisRun,
+  type ChatThread,
+  type ChatMessage,
+  type NewChatThread,
+  type NewChatMessage,
 } from "./schema";
 
 // --- Project Queries ---
@@ -129,6 +135,8 @@ export interface FeedbackFilterOptions {
   source?: string | "all";
   q?: string;
   themeId?: string;
+  customerSegment?: string | "all";
+  isRepeatCustomer?: boolean;
   page?: number;
   limit?: number;
 }
@@ -150,6 +158,14 @@ export async function getFilteredFeedback(options: FeedbackFilterOptions) {
 
   if (options.source && options.source !== "all") {
     conditions.push(eq(feedbackItems.source, options.source));
+  }
+
+  if (options.customerSegment && options.customerSegment !== "all") {
+    conditions.push(eq(feedbackItems.customerSegment, options.customerSegment));
+  }
+
+  if (typeof options.isRepeatCustomer === "boolean") {
+    conditions.push(eq(feedbackItems.isRepeatCustomer, options.isRepeatCustomer));
   }
 
   if (options.q && options.q.trim()) {
@@ -287,3 +303,65 @@ export async function getRecommendationsForRun(runId: string): Promise<Recommend
     .where(eq(recommendations.runId, runId))
     .orderBy(asc(recommendations.rank));
 }
+
+// --- Chat Queries ---
+
+export async function createChatThread(projectId: string, title = "New Conversation"): Promise<ChatThread> {
+  const [thread] = await db
+    .insert(chatThreads)
+    .values({
+      projectId,
+      title,
+    })
+    .returning();
+  return thread;
+}
+
+export async function listChatThreads(projectId: string): Promise<ChatThread[]> {
+  return await db
+    .select()
+    .from(chatThreads)
+    .where(eq(chatThreads.projectId, projectId))
+    .orderBy(desc(chatThreads.updatedAt));
+}
+
+export async function getChatThreadWithMessages(threadId: string): Promise<{
+  thread: ChatThread;
+  messages: ChatMessage[];
+} | null> {
+  const [thread] = await db.select().from(chatThreads).where(eq(chatThreads.id, threadId));
+  if (!thread) return null;
+
+  const messages = await db
+    .select()
+    .from(chatMessages)
+    .where(eq(chatMessages.threadId, threadId))
+    .orderBy(asc(chatMessages.createdAt));
+
+  return { thread, messages };
+}
+
+export async function updateChatThreadTitle(threadId: string, title: string): Promise<ChatThread | null> {
+  const [updated] = await db
+    .update(chatThreads)
+    .set({ title, updatedAt: new Date() })
+    .where(eq(chatThreads.id, threadId))
+    .returning();
+  return updated || null;
+}
+
+export async function deleteChatThread(threadId: string): Promise<boolean> {
+  const result = await db.delete(chatThreads).where(eq(chatThreads.id, threadId)).returning();
+  return result.length > 0;
+}
+
+export async function createChatMessage(data: NewChatMessage): Promise<ChatMessage> {
+  const [msg] = await db.insert(chatMessages).values(data).returning();
+  // touch thread updatedAt
+  await db
+    .update(chatThreads)
+    .set({ updatedAt: new Date() })
+    .where(eq(chatThreads.id, data.threadId));
+  return msg;
+}
+

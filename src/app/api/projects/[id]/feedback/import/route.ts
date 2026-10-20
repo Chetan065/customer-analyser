@@ -19,6 +19,11 @@ const importSchema = z.discriminatedUnion("type", [
       sourceColumn: z.string().optional(),
       productVersionColumn: z.string().optional(),
       occurredAtColumn: z.string().optional(),
+      customerIdColumn: z.string().optional(),
+      orderCountColumn: z.string().optional(),
+      customerSegmentColumn: z.string().optional(),
+      regionColumn: z.string().optional(),
+      productColumn: z.string().optional(),
     }),
   }),
   z.object({
@@ -66,6 +71,11 @@ export async function POST(
         sourceColumn: "source",
         productVersionColumn: "product_version",
         occurredAtColumn: "occurred_at",
+        customerIdColumn: "customer_id",
+        orderCountColumn: "order_count",
+        customerSegmentColumn: "customer_segment",
+        regionColumn: "region",
+        productColumn: "product",
       };
       const { items } = parseCsvWithMapping(sampleCsv, mapping);
       itemsToInsert = items;
