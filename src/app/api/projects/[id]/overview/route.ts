@@ -9,6 +9,7 @@ import {
   recommendations,
 } from "@/lib/db/schema";
 import { getProject, getLatestRunForProject } from "@/lib/db/queries";
+import { ensureDatabaseSchema } from "@/lib/db/bootstrap";
 import { successResponse, errorResponse, handleApiError } from "@/lib/api-response";
 
 export async function GET(
@@ -16,6 +17,7 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    await ensureDatabaseSchema();
     const { id: projectId } = await params;
     const project = await getProject(projectId);
     if (!project) {

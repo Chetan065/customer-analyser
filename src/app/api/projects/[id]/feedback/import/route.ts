@@ -3,6 +3,7 @@ import { z } from "zod";
 import fs from "fs";
 import path from "path";
 import { getProject, insertFeedbackBatch } from "@/lib/db/queries";
+import { ensureDatabaseSchema } from "@/lib/db/bootstrap";
 import { parseCsvWithMapping, parsePastedText, autoDetectColumnMapping, MAX_UPLOAD_ITEMS } from "@/lib/ingest/csv";
 import type { NormalizedItem } from "@/lib/ingest/normalize";
 import { successResponse, errorResponse, handleApiError } from "@/lib/api-response";
@@ -33,6 +34,7 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    await ensureDatabaseSchema();
     const { id: projectId } = await params;
     const project = await getProject(projectId);
     if (!project) {

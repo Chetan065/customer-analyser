@@ -1,6 +1,7 @@
 import * as React from "react";
 import { notFound } from "next/navigation";
 import { getProject } from "@/lib/db/queries";
+import { ensureDatabaseSchema } from "@/lib/db/bootstrap";
 import { Sidebar } from "@/components/layout/sidebar";
 
 export default async function ProjectLayout({
@@ -10,6 +11,7 @@ export default async function ProjectLayout({
   children: React.ReactNode;
   params: Promise<{ id: string }>;
 }) {
+  await ensureDatabaseSchema();
   const { id } = await params;
   const project = await getProject(id);
 

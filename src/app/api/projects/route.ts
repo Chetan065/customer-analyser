@@ -2,6 +2,7 @@ import { NextRequest } from "next/server";
 import { z } from "zod";
 import { listProjects, createProject } from "@/lib/db/queries";
 import { getCurrentUser } from "@/lib/auth/session";
+import { ensureDatabaseSchema } from "@/lib/db/bootstrap";
 import { successResponse, handleApiError } from "@/lib/api-response";
 
 const createProjectSchema = z.object({
@@ -11,6 +12,7 @@ const createProjectSchema = z.object({
 
 export async function GET() {
   try {
+    await ensureDatabaseSchema();
     const user = await getCurrentUser();
     const projects = await listProjects(user?.id);
     return successResponse(projects);
@@ -21,13 +23,21 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
+    await ensureDatabaseSchema();
     const user = await getCurrentUser();
     const json = await req.json();
     const validated = createProjectSchema.parse(json);
-    const project = await createProject({
-      ...validated,
-      userId: user?.id || null,
-    });
+
+    const projectData: any = {
+      name: validated.name.trim(),
+      description: validated.description?.trim() || null,
+    };
+
+    if (user?.id) {
+      projectData.userId = user.id;
+    }
+
+    const project = await createProject(projectData);
     return successResponse(project, 201);
   } catch (err) {
     return handleApiError(err);

@@ -5,6 +5,7 @@ import { db } from "@/lib/db/client";
 import { users } from "@/lib/db/schema";
 import { verifyPassword } from "@/lib/auth/password";
 import { createSession } from "@/lib/auth/session";
+import { ensureDatabaseSchema } from "@/lib/db/bootstrap";
 import { successResponse, errorResponse, handleApiError } from "@/lib/api-response";
 
 const loginSchema = z.object({
@@ -14,6 +15,7 @@ const loginSchema = z.object({
 
 export async function POST(req: NextRequest) {
   try {
+    await ensureDatabaseSchema();
     const json = await req.json();
     const { email, password } = loginSchema.parse(json);
 
