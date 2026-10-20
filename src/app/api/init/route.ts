@@ -4,9 +4,10 @@ import { neon } from "@neondatabase/serverless";
 import { env } from "@/lib/env";
 import { successResponse, errorResponse, handleApiError } from "@/lib/api-response";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
-    const initialized = await ensureDatabaseSchema();
+    const force = req.nextUrl?.searchParams?.get("force") === "true";
+    const initialized = await ensureDatabaseSchema(force);
     if (!initialized) {
       return errorResponse("Failed to initialize database schema. Check your DATABASE_URL in environment variables.", 500);
     }
@@ -29,6 +30,6 @@ export async function GET() {
   }
 }
 
-export async function POST() {
-  return GET();
+export async function POST(req: NextRequest) {
+  return GET(req);
 }

@@ -3,6 +3,7 @@ import { eq, desc } from "drizzle-orm";
 import { db } from "@/lib/db/client";
 import { themes } from "@/lib/db/schema";
 import { getLatestRunForProject, getProject } from "@/lib/db/queries";
+import { getCurrentUser } from "@/lib/auth/session";
 import { successResponse, errorResponse, handleApiError } from "@/lib/api-response";
 
 export async function GET(
@@ -10,8 +11,13 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const user = await getCurrentUser();
+    if (!user) {
+      return errorResponse("Unauthorized. Please log in.", 401);
+    }
+
     const { id: projectId } = await params;
-    const project = await getProject(projectId);
+    const project = await getProject(projectId, user.id);
     if (!project) {
       return errorResponse("Project not found", 404);
     }

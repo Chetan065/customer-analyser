@@ -51,34 +51,21 @@ export default function LoginPage() {
   const handleDemoLogin = async () => {
     setDemoLoading(true);
     try {
-      // First try login with demo account
-      const loginRes = await fetch("/api/auth/login", {
+      const res = await fetch("/api/auth/demo", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: "demo@feedbackanalyzer.ai",
-          password: "demopassword123",
-        }),
       });
 
-      let json = await loginRes.json();
-
-      if (!loginRes.ok) {
-        // If demo user doesn't exist yet, register it
-        const regRes = await fetch("/api/auth/register", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name: "Demo Product Lead",
-            email: "demo@feedbackanalyzer.ai",
-            password: "demopassword123",
-          }),
-        });
-        json = await regRes.json();
+      const json = await res.json();
+      if (!res.ok || json.error) {
+        throw new Error(json.error?.message || "Failed to start demo session");
       }
 
-      toast.success("Logged in with Demo Account!");
-      router.push("/");
+      toast.success("Welcome to your isolated PulseIQ demo workspace!");
+      if (json.data?.projectId) {
+        router.push(`/projects/${json.data.projectId}`);
+      } else {
+        router.push("/");
+      }
       router.refresh();
     } catch (err: any) {
       toast.error("Demo login failed: " + err.message);
@@ -100,7 +87,7 @@ export default function LoginPage() {
             <Sparkles className="h-6 w-6" />
           </div>
           <h1 className="text-2xl font-bold tracking-tight text-foreground">
-            Feedback<span className="text-primary ml-1">Analyzer</span>
+            Pulse<span className="text-primary ml-1">IQ</span>
           </h1>
           <p className="text-xs text-muted-foreground">
             Sign in to access your customer intelligence projects and roadmaps.
@@ -175,7 +162,7 @@ export default function LoginPage() {
                 className="w-full h-9 text-xs gap-2"
               >
                 <Sparkles className="h-3.5 w-3.5 text-primary" />
-                <span>{demoLoading ? "Logging in..." : "One-Click Demo Account"}</span>
+                <span>{demoLoading ? "Creating private demo workspace..." : "Instant Demo (Isolated Workspace)"}</span>
               </Button>
             </CardContent>
 

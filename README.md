@@ -1,4 +1,4 @@
-# Feedback Analyzer — AI Customer Feedback Intelligence App
+# PulseIQ — AI Customer Feedback Intelligence App
 
 [![Next.js](https://img.shields.io/badge/Next.js-16_App_Router-black?logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Strict_Mode-blue?logo=typescript)](https://www.typescriptlang.org/)
@@ -7,7 +7,7 @@
 [![LangGraph](https://img.shields.io/badge/LangGraph_JS-Orchestration-orange)](https://github.com/langchain-ai/langgraphjs)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?logo=tailwindcss)](https://tailwindcss.com/)
 
-**Feedback Analyzer** transforms unstructured customer feedback (reviews, support tickets, survey responses, app store comments) into prioritized, explainable product roadmaps and strategic initiatives. Every recurring theme and AI recommendation is directly traceable to verbatim customer evidence quotes.
+**PulseIQ** transforms unstructured customer feedback (reviews, support tickets, survey responses, app store comments) into prioritized, explainable product roadmaps and strategic initiatives. Every recurring theme and AI recommendation is directly traceable to verbatim customer evidence quotes.
 
 ---
 
@@ -64,25 +64,25 @@
 
 ```mermaid
 flowchart TD
-    User([User Ingests CSV or Pastes Feedback]) --> Ingest[Parse, Clean & SHA-256 Dedupe]
-    Ingest --> DB[(Neon Postgres + pgvector)]
+    User(["User Ingests CSV or Pastes Feedback"]) --> Ingest["Parse, Clean & SHA-256 Dedupe"]
+    Ingest --> DB[("Neon Postgres + pgvector")]
 
-    subgraph Serverless Pipeline [Resumable Step Runner — /api/runs/:runId/step]
+    subgraph PipelineRunner ["Serverless Pipeline (Resumable Step Runner — /api/runs/:runId/step)"]
       direction TB
-      Step1[Stage 1: Batch Gemini Classification] -->|Structured Output| Extract[Extract Sentiment, Aspects, Pain Points & Requests]
-      Extract --> Step2[Stage 2: Batched Gemini Embeddings]
-      Step2 -->|768-dim text-embedding-004| StoreVec[Store in insights table]
-      StoreVec --> Step3[Stage 3: TS Agglomerative Clustering]
-      Step3 -->|Cosine Sim >= 0.78 & Singleton Merge| Clusters[Group Separate Pain Points & Requests]
-      Clusters --> Step4[Stage 4: Gemini Theme Labeling & Math Scoring]
-      Step4 -->|Deterministic Priority Formula| Themes[(Ranked Themes)]
-      Themes --> Step5[Stage 5: Gemini Strategic Recommendations]
-      Step5 -->|Verbatim Substring Validation| Recs[(Recommendations with Real Quotes)]
+      Step1["Stage 1: Batch Gemini Classification"] -->|"Structured Output"| Extract["Extract Sentiment, Aspects, Pain Points & Requests"]
+      Extract --> Step2["Stage 2: Batched Gemini Embeddings"]
+      Step2 -->|"768-dim text-embedding-004"| StoreVec["Store in insights table"]
+      StoreVec --> Step3["Stage 3: TS Agglomerative Clustering"]
+      Step3 -->|"Cosine Sim >= 0.78 & Singleton Merge"| Clusters["Group Separate Pain Points & Requests"]
+      Clusters --> Step4["Stage 4: Gemini Theme Labeling & Math Scoring"]
+      Step4 -->|"Deterministic Priority Formula"| Themes[("Ranked Themes")]
+      Themes --> Step5["Stage 5: Gemini Strategic Recommendations"]
+      Step5 -->|"Verbatim Substring Validation"| Recs[("Recommendations with Real Quotes")]
     end
 
-    DB --> Serverless Pipeline
-    Recs --> Dashboard[Interactive Intelligence Dashboard & Theme Drawer]
-    Dashboard --> Export[Export CSV / JSON / Markdown Report]
+    DB --> PipelineRunner
+    Recs --> Dashboard["Interactive Intelligence Dashboard & Theme Drawer"]
+    Dashboard --> Export["Export CSV / JSON / Markdown Report"]
 ```
 
 ---
@@ -161,7 +161,9 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-> **Instant Demo**: On the `/login` screen, click **"One-Click Demo Account"** to sign in instantly with a pre-configured account, or create a new account via the register screen.
+> **Instant Demo (Isolated Workspace)**: On the `/login` screen, click **"Instant Demo (Isolated Workspace)"** to immediately provision a private, isolated demo account pre-seeded with sample feedback. Every demo session is generated with a unique identity and private workspace so that no visitor ever sees or edits another user's projects.
+>
+> **Example Test CSV**: A structured example CSV is available at `/test-feedback.csv` (and `/data/test-feedback.csv`) with 35 realistic customer reviews spanning bugs, feature requests, pricing feedback, and praise. You can use it as a template for your own data or download it directly from the Ingestion dialog.
 
 ---
 
@@ -172,8 +174,8 @@ To ensure maximum reliability and prevent third-party vendor lock-in or peer dep
 - **Password Hashing**: Implemented in [`src/lib/auth/password.ts`](file:///Volumes/ssd/f/src/lib/auth/password.ts) using `crypto.pbkdf2Sync` (100,000 iterations, SHA-512) with a unique 16-byte random salt per user.
 - **Timing Attack Prevention**: Password comparison is executed via `crypto.timingSafeEqual`.
 - **Session Tokens**: 32-byte cryptographically secure random tokens stored in the `sessions` table and delivered via secure `httpOnly`, `sameSite: "lax"` cookies (`fa_session`).
-- **Route Protection**: Next.js middleware ([`src/middleware.ts`](file:///Volumes/ssd/f/src/middleware.ts)) guards `/projects/*` routes and redirects unauthenticated users to `/login`.
-- **Multi-Tenant Data Scoping**: All projects are linked to the authenticated user's `user_id`.
+- **Route Protection**: Next.js middleware ([`src/middleware.ts`](file:///Volumes/ssd/f/src/middleware.ts)) guards `/`, `/projects/*`, and `/api/projects/*` routes, redirecting unauthenticated users to `/login`.
+- **Strict Multi-Tenant Isolation & Atomicity**: Every project is strictly scoped to the authenticated user's `userId`. Users (including demo visitors) can only view, modify, and delete their own projects. Unowned or shared cross-tenant leakages are prevented at the query level.
 
 ---
 
@@ -218,7 +220,7 @@ Clustering runs in pure TypeScript ([`src/lib/analysis/clustering.ts`](file:///V
 Standard LLM pipelines for 150+ reviews take 60–120+ seconds, which causes **504 Gateway Timeouts** on serverless runtimes (Vercel, AWS Lambda).
 
 ### The Solution: Resumable Step Runner
-Feedback Analyzer utilizes an **idempotent, chunked execution model**:
+PulseIQ utilizes an **idempotent, chunked execution model**:
 1. `POST /api/projects/:id/analyze`: Creates an `analysis_runs` record with status `queued`.
 2. `POST /api/runs/:runId/step`: Executes one bounded unit of work (e.g. 15 items for Gemini classification, one embedding batch, or the clustering step) and saves progress to Neon.
 3. The client loops calling `/step` with live progress (0% to 100%).

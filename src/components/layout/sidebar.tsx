@@ -70,7 +70,7 @@ export function Sidebar({ currentProjectId, projectName, onNewProject }: Sidebar
             <Sparkles className="h-4 w-4" />
           </div>
           <div>
-            <span className="text-base tracking-tight">Feedback</span>
+            <span className="text-base tracking-tight">Pulse</span>
             <span className="text-base font-semibold text-primary ml-1">IQ</span>
           </div>
         </Link>
@@ -119,20 +119,9 @@ export function Sidebar({ currentProjectId, projectName, onNewProject }: Sidebar
         })}
       </div>
 
-      {/* Footer Info & User */}
-      <div className="p-4 border-t text-xs text-muted-foreground space-y-3">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span>Postgres + pgvector</span>
-          </div>
-        </div>
-        <p className="text-[11px] text-muted-foreground/80">
-          Powered by LangGraph & Google Gemini
-        </p>
-        <div className="pt-2 border-t">
-          <UserMenu />
-        </div>
+      {/* Footer User */}
+      <div className="p-4 border-t">
+        <UserMenu />
       </div>
     </aside>
   );

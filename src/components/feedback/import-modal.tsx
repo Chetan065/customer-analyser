@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { toast } from "sonner";
-import { UploadCloud, FileSpreadsheet, ClipboardCopy, Sparkles, AlertCircle, Check, ArrowRight } from "lucide-react";
+import { UploadCloud, FileSpreadsheet, ClipboardCopy, Sparkles, AlertCircle, Check, ArrowRight, Download } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -263,6 +263,16 @@ export function ImportModal({
                       }}
                     />
                   </label>
+                  <div className="pt-1">
+                    <a
+                      href="/test-feedback.csv"
+                      download="test-feedback.csv"
+                      className="text-xs text-primary hover:underline inline-flex items-center gap-1.5 font-medium"
+                    >
+                      <Download className="h-3.5 w-3.5" />
+                      Download example test CSV template
+                    </a>
+                  </div>
                 </div>
               </div>
             ) : (

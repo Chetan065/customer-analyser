@@ -1,0 +1,36 @@
+text,rating,source,product_version,date
+"Every time I try to export our monthly board report to CSV, the web app crashes with a blank white screen. Lost 2 hours of work yesterday!",1,Zendesk,v2.5.0,2026-09-12T14:22:00Z
+"Exporting to PDF fails silently. The spinning wheel runs forever and no file downloads. Our clients need these reports weekly.",2,G2,v2.5.1,2026-09-15T09:15:00Z
+"CSV export is completely broken for projects with more than 100 tasks. Throws an internal server error every single time.",1,App Store,v2.5.2,2026-09-20T11:40:00Z
+"Love the dashboard views, but the PDF export cuts off the rightmost columns and corrupts data formatting.",3,Capterra,v2.4.8,2026-08-04T16:10:00Z
+"Tried exporting data for our board meeting and the CSV export button was completely unresponsive. Had to copy paste manually.",2,Support Ticket,v2.5.0,2026-09-25T13:00:00Z
+"Google Calendar sync keeps disconnecting every 3 days. I miss team meetings because task deadlines do not update on my calendar.",1,G2,v2.4.9,2026-08-11T12:00:00Z
+"Calendar two-way sync creates duplicate events whenever a teammate reschedules a deadline. My calendar is a mess.",2,Zendesk,v2.5.0,2026-08-28T08:45:00Z
+"The Google calendar integration constantly shows auth token expired. We have to re-authenticate our entire team every week.",2,Support Ticket,v2.5.1,2026-09-03T15:20:00Z
+"Deadline sync with Outlook and Google Calendar is terribly delayed. Changes take up to 4 hours to reflect on my phone.",2,Capterra,v2.4.5,2026-07-19T14:10:00Z
+"Push notifications on iOS are completely broken after updating to iOS 18. Nothing arrives unless the app is actively open.",1,App Store,v2.5.2,2026-09-28T18:30:00Z
+"Mobile app crashes instantly whenever I open a task that has images or PDF attachments. Unusable on iPhone 15.",1,App Store,v2.5.1,2026-09-18T17:15:00Z
+"Notifications arrive 2 hours late. Real-time collaboration is impossible when push alerts are this delayed.",2,In-App NPS,v2.5.2,2026-10-10T14:50:00Z
+"We loved the product until renewal time when our pricing increased by 65% with zero advance notice. We are actively migrating our team to ClickUp.",1,G2,v2.5.0,2026-09-14T10:00:00Z
+"The mandatory 10-seat minimum is absurd for small boutique agencies. We only have 4 staff members but are forced to pay for 10 full licenses. Will cancel if not resolved.",2,Capterra,v2.4.9,2026-08-30T16:45:00Z
+"Hidden per-user charges for integrations like Slack and Jira that used to be free in the standard plan. Greedy pricing model.",2,Trustpilot,v2.5.1,2026-10-01T11:15:00Z
+"Please add a native Slack bot! We want to create tasks and approve milestones directly from Slack channels without opening a browser tab.",5,Product Hunt,v2.5.0,2026-08-15T19:30:00Z
+"Desperately need bi-directional GitHub issues integration so our engineering team does not have to copy tickets back and forth.",4,G2,v2.4.9,2026-07-28T10:15:00Z
+"Please support Webhooks and Zapier. We want to trigger automated customer emails whenever a milestone status flips to Completed.",4,Capterra,v2.5.2,2026-10-08T13:40:00Z
+"Please bring Dark Mode to the desktop web app. Working at night on these bright white screens causes serious eye fatigue.",4,App Store,v2.5.0,2026-08-20T21:10:00Z
+"Dark theme is essential for our engineering team. All other productivity tools we use have dark mode by default.",3,Support Ticket,v2.4.8,2026-07-15T16:00:00Z
+"Customer support is virtually non-existent. Submitted a priority bug ticket 6 days ago and only received generic automated responses.",1,Zendesk,v2.5.0,2026-09-21T09:30:00Z
+"The AI chatbot on the help center goes in circles and makes it impossible to reach an actual human agent for billing inquiries.",2,Support Ticket,v2.5.2,2026-10-04T12:00:00Z
+"Support team took 4 business days to respond to an account lockout issue during our launch week. Highly disappointed.",1,Trustpilot,v2.4.9,2026-08-19T14:45:00Z
+"The initial onboarding wizard is confusing and assumes you already know how workspace hierarchies work. Needs step-by-step video tutorials.",3,In-App NPS,v2.5.1,2026-09-10T16:15:00Z
+"Inviting new team members sends an email link that frequently expires within 10 minutes, causing endless friction during onboarding.",2,Zendesk,v2.5.0,2026-08-25T11:20:00Z
+"The Kanban board is incredibly fast and responsive. Our engineering standups run 10x smoother since switching to this tool.",5,G2,v2.5.2,2026-10-12T09:00:00Z
+"Task dependencies and milestone tracking are hands-down the best in the market. Clean UI and very intuitive.",5,Capterra,v2.5.1,2026-09-29T15:30:00Z
+"Search across workspaces is blazing fast. Finding archived client briefs takes seconds now.",5,Product Hunt,v2.5.0,2026-08-17T14:20:00Z
+"The mobile app on Android is smooth and allows me to update task statuses on the train without any lag.",5,Google Play,v2.5.2,2026-10-14T17:45:00Z
+"Keyboard shortcuts for creating and assigning subtasks are phenomenal. Power user experience is top tier.",5,G2,v2.5.1,2026-09-27T10:10:00Z
+"UI is smooth and snappy on small projects, but crawls to a halt when switching between large team workspaces with 50+ members.",3,Capterra,v2.4.8,2026-08-18T10:05:00Z
+"Loading times for the analytics dashboard exceed 15 seconds during peak European business hours.",2,In-App NPS,v2.5.0,2026-09-02T13:30:00Z
+"Overall decent task manager, but the pricing jump for growing teams is too steep to recommend to seed stage startups.",3,G2,v2.5.1,2026-09-19T12:00:00Z
+"Great product for daily task tracking, though we still miss native GitLab and Figma integrations.",4,Capterra,v2.5.2,2026-10-11T16:20:00Z
+"Good core functionality. Fix the CSV export crash and notifications bug and this would easily be a 5-star product.",3,App Store,v2.5.2,2026-10-06T11:50:00Z

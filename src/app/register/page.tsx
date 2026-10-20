@@ -66,7 +66,7 @@ export default function RegisterPage() {
             <Sparkles className="h-6 w-6" />
           </div>
           <h1 className="text-2xl font-bold tracking-tight text-foreground">
-            Feedback<span className="text-primary ml-1">Analyzer</span>
+            Pulse<span className="text-primary ml-1">IQ</span>
           </h1>
           <p className="text-xs text-muted-foreground">
             Create an account to analyze customer feedback and automate insights.

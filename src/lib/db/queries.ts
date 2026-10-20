@@ -19,10 +19,15 @@ import {
 // --- Project Queries ---
 
 export async function listProjects(userId?: string): Promise<Array<Project & { feedbackCount: number; runCount: number }>> {
-  const query = db.select().from(projects);
-  const allProjects = userId
-    ? await query.where(or(eq(projects.userId, userId), sql`${projects.userId} IS NULL`)).orderBy(desc(projects.createdAt))
-    : await query.orderBy(desc(projects.createdAt));
+  if (!userId) {
+    return [];
+  }
+
+  const allProjects = await db
+    .select()
+    .from(projects)
+    .where(eq(projects.userId, userId))
+    .orderBy(desc(projects.createdAt));
 
   // Get item counts per project
   const results = await Promise.all(
@@ -53,13 +58,21 @@ export async function createProject(data: NewProject): Promise<Project> {
   return created;
 }
 
-export async function getProject(id: string): Promise<Project | null> {
-  const [project] = await db.select().from(projects).where(eq(projects.id, id));
+export async function getProject(id: string, userId?: string): Promise<Project | null> {
+  const condition = userId
+    ? and(eq(projects.id, id), eq(projects.userId, userId))
+    : eq(projects.id, id);
+
+  const [project] = await db.select().from(projects).where(condition);
   return project || null;
 }
 
-export async function deleteProject(id: string): Promise<boolean> {
-  const result = await db.delete(projects).where(eq(projects.id, id)).returning();
+export async function deleteProject(id: string, userId?: string): Promise<boolean> {
+  const condition = userId
+    ? and(eq(projects.id, id), eq(projects.userId, userId))
+    : eq(projects.id, id);
+
+  const result = await db.delete(projects).where(condition).returning();
   return result.length > 0;
 }
 

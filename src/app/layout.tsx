@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Feedback Analyzer - AI Customer Feedback Intelligence",
+  title: "PulseIQ - AI Customer Feedback Intelligence",
   description:
     "Transform unstructured customer reviews and feedback into actionable, traceable product insights and recommendations.",
 };

@@ -3,6 +3,7 @@ import { z } from "zod";
 import fs from "fs";
 import path from "path";
 import { getProject, insertFeedbackBatch } from "@/lib/db/queries";
+import { getCurrentUser } from "@/lib/auth/session";
 import { ensureDatabaseSchema } from "@/lib/db/bootstrap";
 import { parseCsvWithMapping, parsePastedText, autoDetectColumnMapping, MAX_UPLOAD_ITEMS } from "@/lib/ingest/csv";
 import type { NormalizedItem } from "@/lib/ingest/normalize";
@@ -35,8 +36,13 @@ export async function POST(
 ) {
   try {
     await ensureDatabaseSchema();
+    const user = await getCurrentUser();
+    if (!user) {
+      return errorResponse("Unauthorized. Please log in.", 401);
+    }
+
     const { id: projectId } = await params;
-    const project = await getProject(projectId);
+    const project = await getProject(projectId, user.id);
     if (!project) {
       return errorResponse("Project not found", 404);
     }
